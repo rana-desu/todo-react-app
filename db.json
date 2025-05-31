@@ -1,0 +1,34 @@
+{
+  "todos": [
+    {
+      "id": "b8b9",
+      "content": "add a toggle button for complete",
+      "checked": false
+    },
+    {
+      "id": "90cf",
+      "content": "style the unordered lists",
+      "checked": false
+    },
+    {
+      "id": "bc15",
+      "content": "conver the buttons into something more \"compact\"",
+      "checked": false
+    },
+    {
+      "id": "c144",
+      "content": "add a notification system for error, confirms, affirms, etc",
+      "checked": false
+    },
+    {
+      "id": "8ebc",
+      "content": "add an edit feature",
+      "checked": false
+    },
+    {
+      "id": "024f",
+      "content": "update the app so that it can accommodate entirely new todo-lists",
+      "checked": false
+    }
+  ]
+}
