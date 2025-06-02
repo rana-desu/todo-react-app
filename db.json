@@ -49,6 +49,11 @@
       "id": "44c8",
       "content": "to fix: editing a note ends up creating one",
       "checked": true
+    },
+    {
+      "id": "e529",
+      "content": "new todo",
+      "checked": false
     }
   ]
 }

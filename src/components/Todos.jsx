@@ -32,11 +32,11 @@ const Todo = ({ todo, handleSubmit, handleDelete, handleToggle }) => {
           <TodoForm
             todoId={todo.id} 
             editedContent={editedContent}
-            onSubmit={() => {
+            handleSubmit={() => {
               handleSubmit(todo.id, editedContent)
               setEditingId(null)
             }}
-            onChange={handleEditChange}
+            handleChange={handleEditChange}
             value={editedContent}
           />
         ) : (

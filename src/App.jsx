@@ -65,11 +65,11 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h1>TODO App</h1>
+    <div class="todo-list">
+      <h1 style={{textAlign: 'center'}}>TODO App</h1>
       <TodoForm 
-        onSubmit={addTodo}
-        onChange={handleTodoChange}
+        handleSubmit={addTodo}
+        handleChange={handleTodoChange}
         value={newTodo}
         classes="add-form"
       />

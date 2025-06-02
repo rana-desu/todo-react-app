@@ -13,6 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -88,7 +93,7 @@ ul, li {
 .add-form {
   display: flex;
   justify-content: space-between;
-  max-width: 484px;
+  max-width: 498px;
   margin: 8px;
   margin-bottom: 30px;
 }

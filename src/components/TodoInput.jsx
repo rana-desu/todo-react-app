@@ -1,11 +1,11 @@
-const TodoInput = ({ value, onChange, onKeyDown }) => {
+const TodoInput = ({ value, handleChange, onKeyDown }) => {
   return (
     <textarea
       type="text"
       className="todo-input"
       placeholder="Enter TODO"
       value={value}
-      onChange={onChange}
+      onChange={handleChange}
       onKeyDown={onKeyDown}
     ></textarea>
   )
