@@ -8,7 +8,6 @@ const App = () => {
   const [todos, setTodos] = useState([])
   const [newTodo, setNewTodo] = useState('')
 
-  // render todos on initial startup
   useEffect(() => {
     todoService.render()
       .then(initialTodos => setTodos(initialTodos))
@@ -36,9 +35,9 @@ const App = () => {
     setTodos(todos.map(todo => todo.id === id ? updatedTodo : todo))
   }
 
-  const editTodo = (id, changedContent) => {
+  const editTodo = (id, editedContent) => {
     const todo = findTodoById(id)
-    const updatedTodo = { ...todo, content: changedContent }
+    const updatedTodo = { ...todo, content: editedContent }
 
     todoService.update(id, updatedTodo)
       .then(returnedTodo => {
@@ -46,16 +45,16 @@ const App = () => {
       })
   }
 
-  // value controllers / event handlers
-  const handleTodoChange = (event) => setNewTodo(event.target.value)
-  const handleDelete = (id) => {
+  const deleteTodo = (id) => {
     todoService.remove(id)
       .then(() => {
         setTodos(todos.filter(todo => todo.id !== id))
       })
   }
 
-  const handleToggleCheckbox = (id) => {
+  const handleTodoChange = (event) => setNewTodo(event.target.value)
+
+  const handleCheckbox = (id) => {
     const todo = findTodoById(id)
     const updatedTodo = { ...todo, checked: !todo.checked }
 
@@ -72,13 +71,14 @@ const App = () => {
         onSubmit={addTodo}
         onChange={handleTodoChange}
         value={newTodo}
+        classes="add-form"
       />
 
       <Todos 
         todos={todos}
-        onSubmitEdit={editTodo}
-        onClickDelete={handleDelete}
-        onToggle={handleToggleCheckbox}
+        handleSubmit={editTodo}
+        handleDelete={deleteTodo}
+        handleToggle={handleCheckbox}
       />
     </div>
   )

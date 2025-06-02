@@ -53,7 +53,7 @@ ul, li {
 }
 
 .todos-container {
-  max-width: 500px;
+  max-width: 525px;
 }
 
 .todos {
@@ -78,10 +78,19 @@ ul, li {
   width: 40px;
   height: 40px;
   border-radius: 32px;
+  margin-left: 8px;
 }
 .delete-button:hover {
   border-color: red;
   background-color: #1a1a1a;
+}
+
+.add-form {
+  display: flex;
+  justify-content: space-between;
+  max-width: 484px;
+  margin: 8px;
+  margin-bottom: 30px;
 }
 
 .add-button {
@@ -101,6 +110,29 @@ ul, li {
 
   width: 40px;
   height: 40px;
+  margin-right: 8px;
+}
+
+.strikethrough {
+  text-decoration: line-through !important;
+  color: rgb(228, 123, 123);
+}
+
+.todo-input {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: inherit;
+  resize: none;
+  white-space: pre-wrap;
+
+  width: 400px;
+  height: max-content;
+  border: none;
+}
+
+.todo-input:focus {
+  border-bottom-color: #666;
 }
 
 @media (prefers-color-scheme: light) {

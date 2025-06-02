@@ -1,30 +1,39 @@
+import TodoInput from './TodoInput'
 import AddIcon from '../assets/add.svg'
 
-const TodoForm = ({ onSubmit, onChange, value }) => {
-  const formStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    maxWidth: '484px',
-    margin: '8px',
-    marginBottom: '30px',
-  }
-  const inputStyle = {
-    width: '400px'
+const TodoForm = ({ todoId, editedContent, onSubmit, onChange, value, classes }) => {
+  const onEnterKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      onSubmit(e)
+      onSubmit(todoId, editedContent)
+    }
   }
 
-  return (
-    <form action="" onSubmit={onSubmit} style={formStyle}>
-      <input
-        type="text"
-        placeholder="Enter TODO"
-        value={value}
-        onChange={onChange}
-        style={inputStyle}
-      />
-
-      <button className="add-button"><img src={AddIcon} alt="" /></button>
-    </form>
-  )
+  switch (classes) {
+    case 'add-form':
+      return (
+        <form action="" onSubmit={onSubmit} className={classes}>
+          <TodoInput 
+            value={value} 
+            onChange={onChange} 
+            onKeyDown={onEnterKeyDown}
+          />
+          <button className="add-button"><img src={AddIcon} alt="" />
+          </button>
+        </form>
+      )
+  
+    default:
+      return (
+        <form action="" onSubmit={onSubmit} className={classes}>
+          <TodoInput 
+            value={value} 
+            onChange={onChange} 
+            onKeyDown={onEnterKeyDown}
+          />
+        </form>
+      )
+  }
 }
-
 export default TodoForm

@@ -1,37 +1,43 @@
 import { useState } from 'react'
+
 import TodoForm from './TodoForm'
 
 import DeleteIcon from '../assets/delete.svg'
 import EmptyCheckBox from '../assets/empty_check_box.svg'
 import FilledCheckBox from '../assets/filled_check_box.svg'
 
-const Todo = ({ todo, onSubmitEdit, onClickDelete, onToggle }) => {
-  const [currentEdit, setCurrentEdit] = useState(todo.content)
-  const [editing, setEditing] = useState(false)
+const Todo = ({ todo, handleSubmit, handleDelete, handleToggle }) => {
+  const [editingId, setEditingId] = useState(null)
+  const [editedContent, setEditedContent] = useState(todo.content)
 
-  const handleEditing = () => setEditing(true)
-  const handleCurrentEditChange = (event) => {
-    console.log('edited', event.target.value)
-    setCurrentEdit(event.target.value)
-  }
+  const handleEditChange = (event) => setEditedContent(event.target.value)
+  const startEditing = (id) => setEditingId(id)
 
   return (
     <li className="todos">
-      <button className="checkbox" onClick={() => onToggle(todo.id)}>
+      <button className="checkbox" onClick={() => handleToggle(todo.id)}>
         <img src={
           todo.checked ? FilledCheckBox : EmptyCheckBox
         } alt="" />
       </button>
-      <div className="todos-content" onClick={handleEditing}>
+      <div 
+        className={
+          todo.checked 
+            ? 'strikethrough todos-content' 
+            : 'todos-content'
+        } 
+        onClick={() => startEditing(todo.id)}>
       {
-        editing ? (
-          <TodoForm 
+        editingId ? (
+          <TodoForm
+            todoId={todo.id} 
+            editedContent={editedContent}
             onSubmit={() => {
-              onSubmitEdit(todo.id, currentEdit)
-              setEditing(false)
+              handleSubmit(todo.id, editedContent)
+              setEditingId(null)
             }}
-            onChange={handleCurrentEditChange}
-            value={currentEdit}
+            onChange={handleEditChange}
+            value={editedContent}
           />
         ) : (
           todo.content
@@ -39,23 +45,23 @@ const Todo = ({ todo, onSubmitEdit, onClickDelete, onToggle }) => {
       }
       </div>
       <button 
-        onClick={() => onClickDelete(todo.id)}
+        onClick={() => handleDelete(todo.id)}
         className="delete-button"
       ><img src={DeleteIcon} alt="" /></button>
     </li>
   )
 }
 
-const Todos = ({ todos, onSubmitEdit, onClickDelete, onToggle }) => {
+const Todos = ({ todos, handleSubmit, handleDelete, handleToggle }) => {
   return (
     <ul className="todos-container">
       {todos.map((todo) =>
         <Todo 
           key={todo.id} 
           todo={todo}
-          onSubmitEdit={onSubmitEdit}
-          onClickDelete={onClickDelete}
-          onToggle={onToggle}
+          handleSubmit={handleSubmit}
+          handleDelete={handleDelete}
+          handleToggle={handleToggle}
         />
       )}
     </ul>
