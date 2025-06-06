@@ -2,16 +2,24 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/todos'
 
-const render = () => axios.get(baseUrl).then(response => response.data)
+const getAll = () => axios.get(baseUrl).then(response => response.data)
 
-const create = (todoObject) => axios
-    .post(baseUrl, todoObject)
-    .then(response => response.data)
+const create = async (todoObject) => {
+  try {
+    console.log('before POST request');
+    const response = await axios.post(baseUrl, todoObject)
+    console.log('after POST request');
+    return response.data
+  } catch (err) {
+    console.error('POST request failed:', err)
+    throw err
+  }
+}
 
 const remove = (id) => axios.delete(`${baseUrl}/${id}`)
 
-const update = (id, todoObject) => 
-    axios.put(`${baseUrl}/${id}`, todoObject)
-        .then(response => response.data)
+const update = (id, todoObject) => (
+    axios.put(`${baseUrl}/${id}`, todoObject).then(response => response.data)
+)
 
-export default { render, create, remove, update }
+export default { getAll, create, remove, update }

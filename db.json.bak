@@ -1,0 +1,74 @@
+{
+  "todos": [
+    {
+      "id": "b8b9",
+      "content": "add a toggle button for complete",
+      "checked": true
+    },
+    {
+      "id": "90cf",
+      "content": "style the unordered lists",
+      "checked": true
+    },
+    {
+      "id": "bc15",
+      "content": "convert the buttons into something more \"compact\"",
+      "checked": true
+    },
+    {
+      "id": "c144",
+      "content": "add a notification system for errors, confirms, affirms, etc",
+      "checked": false
+    },
+    {
+      "id": "8ebc",
+      "content": "add an edit feature a b",
+      "checked": true
+    },
+    {
+      "id": "024f",
+      "content": "update the app so that it can accommodate multiple new todo-lists",
+      "checked": false
+    },
+    {
+      "id": "bcc0",
+      "content": "improve the styles for editing a todo",
+      "checked": false
+    },
+    {
+      "id": "aaec",
+      "content": "move the add input at the bottom, make it so that it appends a new todo to the list and moves down",
+      "checked": false
+    },
+    {
+      "id": "5f8d",
+      "content": "to fix: editing toggles editing for EVERY todo",
+      "checked": true
+    },
+    {
+      "id": "44c8",
+      "content": "to fix: editing a note ends up creating one",
+      "checked": true
+    },
+    {
+      "id": "d8a1",
+      "content": "add title and description for a todo",
+      "checked": false
+    },
+    {
+      "id": "9e42",
+      "content": "add statuses for each todo",
+      "checked": false
+    },
+    {
+      "id": "e53e",
+      "content": "give an option to create categories and add those to todos",
+      "checked": false
+    },
+    {
+      "id": "346c",
+      "content": "make a filtering function to sort by statuses and categories",
+      "checked": false
+    }
+  ]
+}

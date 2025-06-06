@@ -1,11 +1,18 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* * {
+  border: 1px solid white;
+} */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #141313;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,126 +25,19 @@
   justify-content: center;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.btn-grad {background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%)}
+.btn-grad {
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;    
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
-
-ul, li {
-  list-style: none;
-  margin-left: 0;
-  padding-left: 0;
-}
-
-.todos-container {
-  max-width: 525px;
-}
-
-.todos {
-  display: flex;
-  justify-content: space-between;
-  margin: 8px;
-}
-
-.todos-content {
-  max-width: 400px;
-  width: 400px;
-  margin-top: 7px;
-}
-
-.delete-button {
-  color: red;
-  background-color: #242424;
-
-  display: flex;
-  justify-content: center;
-
-  width: 40px;
-  height: 40px;
-  border-radius: 32px;
-  margin-left: 8px;
-}
-.delete-button:hover {
-  border-color: red;
-  background-color: #1a1a1a;
-}
-
-.add-form {
-  display: flex;
-  justify-content: space-between;
-  max-width: 498px;
-  margin: 8px;
-  margin-bottom: 30px;
-}
-
-.add-button {
-  width: 50px;
-  display: flex;
-  justify-content: center;
-}
-.add-button:hover {
-  border-color: green;
-}
-
-.checkbox {
-  background-color: #242424;
-
-  display: flex;
-  justify-content: center;
-
-  width: 40px;
-  height: 40px;
-  margin-right: 8px;
-}
-
-.strikethrough {
-  text-decoration: line-through !important;
-  color: rgb(228, 123, 123);
-}
-
-.todo-input {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  background-color: inherit;
-  resize: none;
-  white-space: pre-wrap;
-
-  width: 400px;
-  height: max-content;
-  border: none;
-}
-
-.todo-input:focus {
-  border-bottom-color: #666;
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: black;
+  text-decoration: none;
 }
 
 @media (prefers-color-scheme: light) {
