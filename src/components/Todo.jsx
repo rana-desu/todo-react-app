@@ -18,9 +18,16 @@ const Todo = ({ todo }) => {
         border border-gray-500 rounded-[6px]
       "
     >
-      <TodoStatus status="pending" />
+      <div className="flex flex-row items-center justify-between w-full">
+        <TodoStatus status="pending" />
+        <ActionButtons 
+          id={todo.id} 
+          onDelete={deleteTodo}
+          onEdit={() => setIsEditModal(true)}
+        />
+      </div>
 
-      <div className="w-full flex flex-col items-center justify-center p-8 ">
+      <div className="w-full flex flex-col items-center justify-center p-4">
         <TodoContent 
           title={todo.title}
           description={todo.description}
@@ -29,11 +36,6 @@ const Todo = ({ todo }) => {
 
       <div className="flex flex-row justify-between actions w-full border-t px-2 border-gray-500">
         <Categories />
-        <ActionButtons 
-          id={todo.id} 
-          onDelete={deleteTodo}
-          onEdit={() => setIsEditModal(true)}
-        />
       </div>
 
       {

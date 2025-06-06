@@ -16,10 +16,9 @@ const useTodoStore = create((set) => ({
             const newTodo = {
                 title,
                 description,
+                status: 'pending',
             }
-            console.log('before axios call');
             const returnedTodo = await todoService.create(newTodo)
-            console.log('after axios call');
     
             set(({ todos }) => {
                 console.log('new todo to be added: ', returnedTodo)
@@ -53,6 +52,15 @@ const useTodoStore = create((set) => ({
             console.log('changed todos...', mapUpdatedTodo(todos, id, returnedTodo))
             return { todos: mapUpdatedTodo(todos, id, returnedTodo) }
         })
+    },
+
+    updateStatus: async (id, newStatus) => {
+        const returnedTodo = await todoService.update(id, {
+            status: newStatus
+        })
+        set (({ todos }) => ({
+            todos: mapUpdatedTodo(todos, id, returnedTodo)
+        }))
     },
 
     fetchTodos: async () => {

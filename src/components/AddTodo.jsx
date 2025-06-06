@@ -14,10 +14,14 @@ const AddTodo = () => {
     e.preventDefault()
 
     try {
-      console.log('submit triggered')
-      await addTodo(title, description)
-      setTitle('')
-      setDescription('')
+      if (title.trim() && description.trim()) {
+        await addTodo(title.trim(), description.trim())
+        setTitle('')
+        setDescription('')
+        console.log('changed input field values to default.', title, description)
+      } else {
+        alert('please enter non-empty inputs.')
+      }
     } catch (error) {
       console.error('error while handling AddTodo submission:', error)
     }
@@ -36,17 +40,25 @@ const AddTodo = () => {
           type="text"
           name="title"
           className={inputStyles}
+          value={title}
           placeholder="Enter TODO's title"
-          onChange={e => setTitle(e.target.value)}
+          onChange={e => {
+            setTitle(e.target.value)
+            console.log(title);
+          }}
           required
         />
 
-        <input 
+        <textarea 
           type="text"
           name="description"
           className={inputStyles}
+          value={description}
           placeholder="Enter TODO's description"
-          onChange={e => setDescription(e.target.value)}
+          onChange={e => {
+            setDescription(e.target.value)
+            console.log(description)
+          }}
         />
       </div>
 

@@ -6,9 +6,7 @@ const getAll = () => axios.get(baseUrl).then(response => response.data)
 
 const create = async (todoObject) => {
   try {
-    console.log('before POST request');
     const response = await axios.post(baseUrl, todoObject)
-    console.log('after POST request');
     return response.data
   } catch (err) {
     console.error('POST request failed:', err)
