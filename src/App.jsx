@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
+import useTodoStore from './store/todoStore'
+
 import AddTodoForm from './components/AddTodoForm'
 import TodoList from './components/TodoList'
-import useTodoStore from './store/todoStore'
+import FilterTodoList from './components/FilterTodoList'
 
 const App = () => {
   useEffect(() => {
@@ -30,6 +32,7 @@ const App = () => {
           Your todos when created, appear here.
           Click on the action button for more options.
         </p>
+        <FilterTodoList />
         <TodoList />
       </section>
     </div>

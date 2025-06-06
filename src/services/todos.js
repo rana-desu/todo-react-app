@@ -1,12 +1,13 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/todos'
+const todosUrl  = 'http://localhost:3001/todos'
+const configUrl = 'http://localhost:3001/config'
 
-const getAll = () => axios.get(baseUrl).then(response => response.data)
+const getAll = () => axios.get(todosUrl).then(response => response.data)
 
 const create = async (todoObject) => {
   try {
-    const response = await axios.post(baseUrl, todoObject)
+    const response = await axios.post(todosUrl, todoObject)
     return response.data
   } catch (err) {
     console.error('POST request failed:', err)
@@ -14,10 +15,18 @@ const create = async (todoObject) => {
   }
 }
 
-const remove = (id) => axios.delete(`${baseUrl}/${id}`)
+const remove = (id) => axios.delete(`${todosUrl}/${id}`)
 
 const update = (id, todoObject) => (
-    axios.put(`${baseUrl}/${id}`, todoObject).then(response => response.data)
+    axios.put(`${todosUrl}/${id}`, todoObject).then(response => response.data)
 )
 
-export default { getAll, create, remove, update }
+const getConfig = () => (
+  axios.get(configUrl).then(response => response.data)
+)
+
+const setFilter = (status) => (
+  axios.patch(`${configUrl}/1`, { status }).then(response => response.data)
+)
+
+export default { getAll, create, remove, update, getConfig, setFilter }

@@ -8,8 +8,12 @@ const mapUpdatedTodo = (todos, id, updatedTodo) => (
     todos.map(todo => todo.id === id ? updatedTodo : todo)
 )
 
-const useTodoStore = create((set) => ({
+const useTodoStore = create((set, get) => ({
     todos: [],
+    filter: {
+        status: "all",
+        id: 1
+    },
 
     addTodo: async (title, description) => {
         try {
@@ -71,6 +75,34 @@ const useTodoStore = create((set) => ({
         set(() => ({
             todos: fetchedTodos
         }))
+    },
+
+    // fetchConfig: async () => {
+    //     const fetchedConfig = await todoService.getConfig()
+    //     console.log('fetchedConfig', fetchedConfig)
+    //     set(() => ({
+    //         config: fetchedConfig
+    //     }))
+    // },
+
+    setFilter: async (status) => {
+        const returnedFilter = await todoService.setFilter(status)
+        console.log('returned status upon filter change:', returnedFilter);
+        
+        set({ filter: returnedFilter })
+    },
+
+    filteredTodos: () => {
+        const { todos, filter } = get()
+        console.log('config', filter.status)
+
+        if (filter.status === 'all') {
+            console.log('all todos:', todos);
+            
+            return todos
+        }
+
+        return todos.filter(todo => todo.status === filter.status)
     }
 }))
 

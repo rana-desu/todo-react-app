@@ -32,6 +32,7 @@ const EditTodoModal = ({ todo, onEdit, onCancel }) => {
           <option value="in-progress">In Progress</option>
           <option value="completed">Completed</option>
           <option value="rejected">Rejected</option>
+          <option value="on-hold">On Hold</option>          
         </select>
 
         <input

@@ -3,7 +3,7 @@ import useTodoStore from '../store/todoStore'
 
 import AddIcon from '../assets/add.svg?react'
 
-const AddTodo = () => {
+const AddTodoForm = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
@@ -75,7 +75,7 @@ const AddTodo = () => {
           </button>
         </div>
         <button 
-          className="flex flex-row self-end item-center justify-center px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-sm btn-grad"
+          className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-sm btn-grad"
           type="submit"
         >
           <AddIcon className="fill-black mr-2"/>
@@ -86,4 +86,4 @@ const AddTodo = () => {
   )
 }
 
-export default AddTodo
+export default AddTodoForm
