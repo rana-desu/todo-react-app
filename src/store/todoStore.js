@@ -43,10 +43,11 @@ const useTodoStore = create((set) => ({
         }
     },
 
-    editTodo: async (id, newTitle, newDescription) => {
+    editTodo: async (id, newTitle, newDescription, newStatus) => {
         const returnedTodo = await todoService.update(id, {
             title: newTitle,
-            description: newDescription
+            description: newDescription,
+            status: newStatus,
         })
         set(({ todos }) => {
             console.log('changed todos...', mapUpdatedTodo(todos, id, returnedTodo))

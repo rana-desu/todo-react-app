@@ -5,11 +5,13 @@ import TodoStatus from './TodoStatus'
 import TodoContent from './TodoContent'
 import Categories from './Categories'
 import ActionButtons from './ActionButtons'
-import EditModal from './EditModal'
+import EditTodoModal from './EditTodoModal'
 
 const Todo = ({ todo }) => {
-  const [isEditModal, setIsEditModal] = useState(false)
+  const [isEditTodoModal, setIsEditTodoModal] = useState(false)
   const { deleteTodo, editTodo } = useTodoStore()
+
+  console.log(todo)
 
   return (
     <li className="
@@ -19,11 +21,11 @@ const Todo = ({ todo }) => {
       "
     >
       <div className="flex flex-row items-center justify-between w-full">
-        <TodoStatus status="pending" />
+        <TodoStatus status={todo.status} />
         <ActionButtons 
           id={todo.id} 
           onDelete={deleteTodo}
-          onEdit={() => setIsEditModal(true)}
+          onEdit={() => setIsEditTodoModal(true)}
         />
       </div>
 
@@ -39,11 +41,11 @@ const Todo = ({ todo }) => {
       </div>
 
       {
-        isEditModal && (
-          <EditModal 
+        isEditTodoModal && (
+          <EditTodoModal 
             todo={todo}
             onEdit={editTodo}
-            onCancel={() => setIsEditModal(false)}
+            onCancel={() => setIsEditTodoModal(false)}
           />
         )
       }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import AddTodo from './components/AddTodo'
+import AddTodoForm from './components/AddTodoForm'
 import TodoList from './components/TodoList'
 import useTodoStore from './store/todoStore'
 
@@ -21,7 +21,7 @@ const App = () => {
           Input a title, description, and categories to your todo.
           The default status for a new todo is 'pending', it can be changed below.
         </p>
-        <AddTodo />
+        <AddTodoForm />
       </section>
 
       <section className="flex flex-col m-auto w-3xl mt-5">

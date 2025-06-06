@@ -1,13 +1,14 @@
 import { useState } from 'react'
 
-const EditModal = ({ todo, onEdit, onCancel }) => {
+const EditTodoModal = ({ todo, onEdit, onCancel }) => {
   const [title, setTitle] = useState(todo.title)
   const [description, setDescription] = useState(todo.description)
+  const [status, setStatus] = useState(todo.status)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('sending request to axios..')
-    await onEdit(todo.id, title, description)
+    await onEdit(todo.id, title, description, status)
     
     onCancel()
   }
@@ -21,6 +22,17 @@ const EditModal = ({ todo, onEdit, onCancel }) => {
         className="bg-black p-6 rounded-lg w-3xl"
       >
         <h2 className="text-3xl font-bold mb-4">Edit Todo</h2>
+
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          className="w-full p-2 border mb-4"
+        >
+          <option value="pending">Pending</option>
+          <option value="in-progress">In Progress</option>
+          <option value="completed">Completed</option>
+          <option value="rejected">Rejected</option>
+        </select>
 
         <input
           type="text"
@@ -55,4 +67,4 @@ const EditModal = ({ todo, onEdit, onCancel }) => {
   )
 }
 
-export default EditModal
+export default EditTodoModal
