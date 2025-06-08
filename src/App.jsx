@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="page-wrapper bg-linear-to-r bg-radial-[at_25%_25%] from-zinc-900 to-black to-70% min-h-screen w-screen">
       <h1 className="w-screen text-center p-8 text-5xl font-bold">TODO App</h1>
-
+      
       <section className="flex flex-col m-auto w-3xl mt-5">
         <h2 className={subHeaderStyles}>Adding Todos</h2>
         <p className={sectionParaStyles}>
@@ -30,7 +30,7 @@ const App = () => {
         <h2 className={subHeaderStyles}>My Todos</h2>
         <p className={sectionParaStyles}>
           Your todos when created, appear here.
-          Click on the action button for more options.
+          Click on the dropdown menu for more options.
         </p>
         <FilterTodoList />
         <TodoList />

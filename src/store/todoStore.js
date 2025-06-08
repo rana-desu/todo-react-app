@@ -26,7 +26,7 @@ const useTodoStore = create((set, get) => ({
     
             set(({ todos }) => {
                 console.log('new todo to be added: ', returnedTodo)
-                return { todos: [...todos, returnedTodo] }
+                return { todos: [returnedTodo, ...todos] }
             })
         } catch (error) {
             console.error(`Couldn't add todo:`, error)

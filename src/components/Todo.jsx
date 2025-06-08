@@ -1,10 +1,12 @@
 import { useState } from 'react'
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from 'motion/react'
 import useTodoStore from '../store/todoStore'
 
 import TodoStatus from './TodoStatus'
 import TodoContent from './TodoContent'
 import Categories from './Categories'
-import ActionButtons from './ActionButtons'
+import ActionDropdown from './ActionDropdown'
 import EditTodoModal from './EditTodoModal'
 
 const Todo = ({ todo }) => {
@@ -14,42 +16,45 @@ const Todo = ({ todo }) => {
   console.log(todo)
 
   return (
-    <li className="
+    <>
+    <motion.li
+      className="
         flex flex-col items-center justify-center 
-        mb-4 w-full 
-        border border-gray-500 rounded-[6px]
+        mb-4 w-full rounded-[6px]
+        border border-zinc-50/10 bg-opacity-[0.01]
       "
+      exit={{ opacity: 1 }}
+      layoutId={`todo-${todo.id}`}
     >
-      <div className="flex flex-row items-center justify-between w-full">
+      <div 
+        className="flex flex-row items-center justify-between w-full">
         <TodoStatus status={todo.status} />
-        <ActionButtons 
-          id={todo.id} 
+        <ActionDropdown
+          id={todo.id}
           onDelete={deleteTodo}
           onEdit={() => setIsEditTodoModal(true)}
         />
       </div>
 
       <div className="w-full flex flex-col items-center justify-center p-4">
-        <TodoContent 
-          title={todo.title}
-          description={todo.description}
-        />
+        <TodoContent title={todo.title} description={todo.description} />
       </div>
 
-      <div className="flex flex-row justify-between actions w-full border-t px-2 border-gray-500">
+      <div className="flex flex-row justify-between actions w-full border-t px-2 border-zinc-50/10">
         <Categories />
       </div>
+    </motion.li>
 
-      {
-        isEditTodoModal && (
-          <EditTodoModal 
-            todo={todo}
-            onEdit={editTodo}
-            onCancel={() => setIsEditTodoModal(false)}
-          />
-        )
-      }
-    </li>
+    <AnimatePresence>
+      {isEditTodoModal && (
+        <EditTodoModal
+          todo={todo}
+          onEdit={editTodo}
+          onCancel={() => setIsEditTodoModal(false)}
+        />
+      )}      
+    </AnimatePresence>
+    </>
   )
 }
 
