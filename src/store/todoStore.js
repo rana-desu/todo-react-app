@@ -21,6 +21,7 @@ const useTodoStore = create((set, get) => ({
                 title,
                 description,
                 status: 'pending',
+                remark: '',
             }
             const returnedTodo = await todoService.create(newTodo)
     
@@ -47,11 +48,12 @@ const useTodoStore = create((set, get) => ({
         }
     },
 
-    editTodo: async (id, newTitle, newDescription, newStatus) => {
+    editTodo: async (id, newTitle, newDescription, newStatus, newRemark) => {
         const returnedTodo = await todoService.update(id, {
             title: newTitle,
             description: newDescription,
             status: newStatus,
+            remark: newRemark,
         })
         set(({ todos }) => {
             console.log('changed todos...', mapUpdatedTodo(todos, id, returnedTodo))

@@ -3,16 +3,16 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 
 const actionDropdownVariants = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: -10 },
   visible: {
     opacity: 1,
-    y: 60,
-    transition: { type: 'spring', stiffness: 300, damping: 20}
+    y: 0,
+    transition: { type: 'spring', stiffness: 300, damping: 20 }
   },
-  exit: { opacity: 0, y: 60, transition: { duration: 0.2 } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.2 } },
 }
 
-const ActionDropdown = ({ id, onDelete, onEdit }) => {
+const ActionDropdown = ({ id, status, onDelete, onEdit }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -32,7 +32,7 @@ const ActionDropdown = ({ id, onDelete, onEdit }) => {
   }, [])
 
   return (
-    <div ref={dropdownRef} className="action-buttons flex flex-row justify-center items-center mx-3 my-2">
+    <div ref={dropdownRef} className="action-buttons flex flex-row justify-center items-center mx-3 my-2 relative">
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.98 }}
@@ -51,16 +51,22 @@ const ActionDropdown = ({ id, onDelete, onEdit }) => {
             animate="visible"
             exit="exit"
             variants={actionDropdownVariants}
-            className="absolute mt-2 w-40 shadow-lg"
+            className="absolute top-full mt-2 w-40 shadow-lg"
           >
             <div className="bg-black text-white text-sm rounded-[6px] border border-zinc-50/10 bg-opacity-[0.01] p-1">
-              <button
-                type="button"
-                onClick={onEdit}
-                className="flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded"
-              >
-                Edit
-              </button>
+              {
+                status !== 'rejected' && (
+                  <button
+                    type="button"
+                    onClick={onEdit}
+                    className="flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded"
+                  >
+                    Edit
+                  </button>
+
+                )
+              }
+              
               <button
                 type="button"
                 onClick={async () => await onDelete(id)}

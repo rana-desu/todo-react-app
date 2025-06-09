@@ -17,6 +17,7 @@ const Todo = ({ todo }) => {
 
   return (
     <>
+    
     <motion.li
       className="
         flex flex-col items-center justify-center 
@@ -31,13 +32,19 @@ const Todo = ({ todo }) => {
         <TodoStatus status={todo.status} />
         <ActionDropdown
           id={todo.id}
+          status={todo.status}
           onDelete={deleteTodo}
           onEdit={() => setIsEditTodoModal(true)}
         />
       </div>
 
       <div className="w-full flex flex-col items-center justify-center p-4">
-        <TodoContent title={todo.title} description={todo.description} />
+        <TodoContent
+          status={todo.status}
+          title={todo.title} 
+          description={todo.description}
+          remark={todo.remark}
+        />
       </div>
 
       <div className="flex flex-row justify-between actions w-full border-t px-2 border-zinc-50/10">

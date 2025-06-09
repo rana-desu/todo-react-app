@@ -5,12 +5,13 @@ import { motion, AnimatePresence } from 'motion/react'
 const EditTodoModal = ({ todo, onEdit, onCancel }) => {
   const [title, setTitle] = useState(todo.title)
   const [description, setDescription] = useState(todo.description)
+  const [remark, setRemark] = useState("")
   const [status, setStatus] = useState(todo.status)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('sending request to axios..')
-    await onEdit(todo.id, title, description, status)
+    await onEdit(todo.id, title, description, status, remark)
     
     onCancel()
   }
@@ -27,7 +28,7 @@ const EditTodoModal = ({ todo, onEdit, onCancel }) => {
       />
       <motion.div 
         layoutId={`todo-${todo.id}`}
-        className="fixed bg-transparent bg-opacity-1 flex justify-center items-center z-50"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-transparent bg-opacity-1 flex justify-center items-center z-50"
       >
         <form
           onSubmit={handleSubmit}
@@ -59,6 +60,18 @@ const EditTodoModal = ({ todo, onEdit, onCancel }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+
+          {
+            status === 'rejected' && (
+              <input 
+                type="text"
+                className={inputStyles}
+                placeholder="If rejecting the todo, please leave a remark."
+                onChange={(e) => setRemark(e.target.value)}
+                required
+              />
+            )
+          }
 
           <div className="flex justify-end gap-2">
             <button

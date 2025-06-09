@@ -16,8 +16,8 @@ const AddTodoForm = () => {
     e.preventDefault()
 
     try {
-      if (title.trim() && description.trim()) {
-        await addTodo(title.trim(), description.trim())
+      if (title.trim() && description) {
+        await addTodo(title.trim(), description)
         setTitle('')
         setDescription('')
         console.log('changed input field values to default.', title, description)
