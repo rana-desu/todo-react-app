@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'motion/react'
 import Todo from './Todo'
 import useTodoStore from '../store/todoStore'
 
@@ -5,16 +6,19 @@ const TodoList = () => {
   const { filteredTodos } = useTodoStore()
 
   const visibleTodos = filteredTodos()
-  console.log('visible', visibleTodos)
+
+  console.log('reversed visible', visibleTodos.reverse())
 
   return (
     <ul className="flex flex-col item-center justify-start h-full">
-      {visibleTodos.map((todo) =>
-        <Todo 
-          key={todo.id} 
-          todo={todo}
-        />
-      )}
+      <AnimatePresence mode="popLayout">
+        {visibleTodos.map((todo) =>
+          <Todo 
+            key={todo.id} 
+            todo={todo}
+          />
+        )}
+      </AnimatePresence>
     </ul>
   )
 }

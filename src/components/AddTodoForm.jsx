@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import useTodoStore from '../store/todoStore'
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'motion/react'
 
+import useTodoStore from '../store/todoStore'
 import AddIcon from '../assets/add.svg?react'
 
 const AddTodoForm = () => {
@@ -14,8 +16,8 @@ const AddTodoForm = () => {
     e.preventDefault()
 
     try {
-      if (title.trim() && description.trim()) {
-        await addTodo(title.trim(), description.trim())
+      if (title.trim() && description) {
+        await addTodo(title.trim(), description)
         setTitle('')
         setDescription('')
         console.log('changed input field values to default.', title, description)
@@ -27,13 +29,12 @@ const AddTodoForm = () => {
     }
   }
 
-  const inputStyles = `p-5 my-2 min-w-2xl border-1 border-gray-500 outline-none rounded-sm w-full`
-  const categoryStyles = `border-2 border-white rounded-full px-6 py-2 text-white mr-2 hover:bg-white hover:text-black`
+  const inputStyles = `p-5 my-2 min-w-2xl border-1 border-zinc-50/10 bg-opacity-[0.01] outline-none rounded-sm w-full`
 
   return (
     <form
       onSubmit={handleSubmit} 
-      className="flex flex-col items-center justify-center p-8 w-full border border-gray-500 rounded-[6px]"
+      className="flex flex-col items-center justify-center p-8 w-full border border-zinc-50/10 bg-opacity-[0.01] rounded-[6px]"
     > 
       <div className="flex flex-col items-center">
         <input
@@ -62,25 +63,16 @@ const AddTodoForm = () => {
         />
       </div>
 
-      <div className="flex flex-row items-center justify-between min-w-2xl">
-        <div className="select-categories">
-          <button type="button" className={categoryStyles}>
-            home
-          </button>
-          <button type="button" className={categoryStyles}>
-            work
-          </button>
-          <button type="button" className={categoryStyles}>
-            studies
-          </button>
-        </div>
-        <button 
+      <div className="flex flex-row items-center justify-end min-w-2xl">
+        <motion.button
+        whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.85 }}
+          onHoverStart={() => console.log('hover started!')}
           className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-sm btn-grad"
-          type="submit"
         >
           <AddIcon className="fill-black mr-2"/>
           <p>add todo!</p>
-        </button>
+        </motion.button>
       </div>
     </form>
   )

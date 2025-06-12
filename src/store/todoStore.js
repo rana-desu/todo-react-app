@@ -21,12 +21,13 @@ const useTodoStore = create((set, get) => ({
                 title,
                 description,
                 status: 'pending',
+                remark: '',
             }
             const returnedTodo = await todoService.create(newTodo)
     
             set(({ todos }) => {
                 console.log('new todo to be added: ', returnedTodo)
-                return { todos: [...todos, returnedTodo] }
+                return { todos: [returnedTodo, ...todos] }
             })
         } catch (error) {
             console.error(`Couldn't add todo:`, error)
@@ -47,11 +48,12 @@ const useTodoStore = create((set, get) => ({
         }
     },
 
-    editTodo: async (id, newTitle, newDescription, newStatus) => {
+    editTodo: async (id, newTitle, newDescription, newStatus, newRemark) => {
         const returnedTodo = await todoService.update(id, {
             title: newTitle,
             description: newDescription,
             status: newStatus,
+            remark: newRemark,
         })
         set(({ todos }) => {
             console.log('changed todos...', mapUpdatedTodo(todos, id, returnedTodo))
