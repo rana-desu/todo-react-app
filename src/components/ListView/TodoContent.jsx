@@ -1,4 +1,4 @@
-const TodoContent = ({ status, title, description, remark }) => {
+const TodoContent = ({ status, title, description, remark, creationDate }) => {
   return (
     <div className="todos-content w-full">
       <p className="todos-content whitespace-normal break-words p-4">{title}</p>
@@ -8,6 +8,7 @@ const TodoContent = ({ status, title, description, remark }) => {
           <p className="todos-content whitespace-normal break-words p-4 text-zinc-600 italic">remarks: {remark}</p>
         )
       }
+      <p>{creationDate}</p>
     </div>
   )
 }

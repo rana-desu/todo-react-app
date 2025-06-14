@@ -28,8 +28,6 @@ const statusStyles = {
 }
 
 const TodoStatus = ({ status }) => {
-  console.log(status);
-  
   const { icon, className } = statusStyles[status]
 
   return (

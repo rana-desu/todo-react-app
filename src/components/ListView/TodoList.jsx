@@ -1,13 +1,10 @@
 import { AnimatePresence } from 'motion/react'
 import Todo from './Todo'
-import useTodoStore from '../store/todoStore'
+import useTodoStore from '../../store/todoStore'
 
 const TodoList = () => {
   const { filteredTodos } = useTodoStore()
-
   const visibleTodos = filteredTodos()
-
-  console.log('reversed visible', visibleTodos.reverse())
 
   return (
     <ul className="flex flex-col item-center justify-start h-full">

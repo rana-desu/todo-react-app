@@ -1,23 +1,20 @@
 import { useState } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'motion/react'
-import useTodoStore from '../store/todoStore'
+import useTodoStore from '../../store/todoStore'
 
-import TodoStatus from './TodoStatus'
-import TodoContent from './TodoContent'
-import Categories from './Categories'
-import ActionDropdown from './ActionDropdown'
-import EditTodoModal from './EditTodoModal'
+import TodoStatus from '../TodoStatus'
+import TodoContent from '../TodoContent'
+import Categories from '../Categories'
+import ActionDropdown from '../ActionDropdown'
+import EditTodoModal from '../EditTodoModal'
 
 const Todo = ({ todo }) => {
   const [isEditTodoModal, setIsEditTodoModal] = useState(false)
   const { deleteTodo, editTodo } = useTodoStore()
 
-  console.log(todo)
-
   return (
     <>
-    
     <motion.li
       className="
         flex flex-col items-center justify-center 
@@ -44,6 +41,7 @@ const Todo = ({ todo }) => {
           title={todo.title} 
           description={todo.description}
           remark={todo.remark}
+          creationDate={todo.creationDate}
         />
       </div>
 

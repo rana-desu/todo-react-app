@@ -15,7 +15,9 @@ const create = async (todoObject) => {
   }
 }
 
-const remove = (id) => axios.delete(`${todosUrl}/${id}`)
+const remove = (id) => (
+  axios.delete(`${todosUrl}/${id}`)
+)
 
 const update = (id, todoObject) => (
     axios.put(`${todosUrl}/${id}`, todoObject).then(response => response.data)

@@ -11,7 +11,7 @@ const mapUpdatedTodo = (todos, id, updatedTodo) => (
 const useTodoStore = create((set, get) => ({
     todos: [],
     filter: {
-        status: "all",
+        status: "all", // default status set to all
         id: 1
     },
 
@@ -22,12 +22,13 @@ const useTodoStore = create((set, get) => ({
                 description,
                 status: 'pending',
                 remark: '',
+                creationDate: new Date(),
             }
             const returnedTodo = await todoService.create(newTodo)
-    
+
             set(({ todos }) => {
                 console.log('new todo to be added: ', returnedTodo)
-                return { todos: [returnedTodo, ...todos] }
+                return { todos: [...todos, returnedTodo] }
             })
         } catch (error) {
             console.error(`Couldn't add todo:`, error)
@@ -79,14 +80,6 @@ const useTodoStore = create((set, get) => ({
         }))
     },
 
-    // fetchConfig: async () => {
-    //     const fetchedConfig = await todoService.getConfig()
-    //     console.log('fetchedConfig', fetchedConfig)
-    //     set(() => ({
-    //         config: fetchedConfig
-    //     }))
-    // },
-
     setFilter: async (status) => {
         const returnedFilter = await todoService.setFilter(status)
         console.log('returned status upon filter change:', returnedFilter);
@@ -96,15 +89,14 @@ const useTodoStore = create((set, get) => ({
 
     filteredTodos: () => {
         const { todos, filter } = get()
-        console.log('config', filter.status)
 
         if (filter.status === 'all') {
             console.log('all todos:', todos);
             
-            return todos
+            return [...todos].reverse()
         }
-
-        return todos.filter(todo => todo.status === filter.status)
+        
+        return [...todos.filter(todo => todo.status === filter.status)].reverse()
     }
 }))
 
