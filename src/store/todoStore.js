@@ -9,7 +9,7 @@ const mapUpdatedTodo = (todos, id, updatedTodo) => (
 )
 
 const useTodoStore = create((set, get) => ({
-    pageCache: {},
+    pageCache: {}, // structure: { [status]: { [page]: data } }
     currentPage: 1,
     pageSize: 20,
 
@@ -21,15 +21,20 @@ const useTodoStore = create((set, get) => ({
     },
 
     fetchTodosPage: async (page) => {
-        const { pageCache, pageSize } = get()
+        const { pageCache, pageSize, filter } = get()
+        const status = filter.status
 
-        if (pageCache[page]) {
-            set({ todos: pageCache[page], currentPage: page})
+        if (pageCache[status]?.[page]) {
+            set({ 
+                todos: pageCache[status][page], 
+                currentPage: page
+             })
             return
         }
 
-        const returnedPage = await todoService.getPage(page, pageSize)
+        const returnedPage = await todoService.getPage(page, pageSize, status)
         const { data, ...info } = returnedPage
+        console.log(page, returnedPage)
 
         set((state) => ({
             todos: data,
@@ -37,7 +42,10 @@ const useTodoStore = create((set, get) => ({
             currentPage: page,
             pageCache: {
                 ...state.pageCache,
-                [page]: data,
+                [status]: {
+                    ...(state.pageCache[status] || {}),
+                    [page]: data,
+                }
             }
         }))
     },
@@ -111,23 +119,23 @@ const useTodoStore = create((set, get) => ({
     // },
 
     setFilter: async (status) => {
+        const { pageSize } = get()
+
         const returnedFilter = await todoService.setFilter(status)
-        console.log('returned status upon filter change:', returnedFilter);
-        
-        set({ filter: returnedFilter })
+        const firstPage = await todoService.getPage(1, pageSize, status)
+
+        set({
+            filter: returnedFilter,
+            todos: firstPage.data,
+            totalPages: firstPage.pages,
+            currentPage: 1,
+            pageCache: {
+            [status]: {
+                1: firstPage.data
+            }
+            }
+        })
     },
-
-    filteredTodos: () => {
-        const { todos, filter } = get()
-
-        if (filter.status === 'all') {
-            console.log('all todos:', todos);
-            
-            return todos
-        }
-        
-        return todos.filter(todo => todo.status === filter.status)
-    }
 }))
 
 export default useTodoStore

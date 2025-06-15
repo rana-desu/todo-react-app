@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence } from 'motion/react'
 import { useTodoStore } from '@/store'
 import { EditTodo } from '../Modals'
 import TodoStatus from '../TodoStatus'
@@ -19,6 +20,7 @@ const TodoRow = ({ todo }) => {
       <td className="text-sm text-center"><ActionButtons onDelete={() => deleteTodo(todo.id)} onEdit={() => setIsEditing(true)}/></td>
     </tr>
 
+    <AnimatePresence>
     {isEditing && (
       <EditTodo
         todo={todo}
@@ -26,6 +28,7 @@ const TodoRow = ({ todo }) => {
         onCancel={() => setIsEditing(false)}
       />
     )}      
+    </AnimatePresence>
     </>
   )
 }

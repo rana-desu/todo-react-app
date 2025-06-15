@@ -5,9 +5,13 @@ const configUrl = 'http://localhost:3001/config'
 
 const getAll = () => axios.get(todosUrl).then(response => response.data)
 
-const getPage = (page, pageSize) => {
+const getPage = async (page, pageSize, statusFilter) => {
   try {
-    return axios.get(`${todosUrl}?_page=${page}&_per_page=${pageSize}`).then(response => response.data)
+    if (statusFilter !== 'all') {
+      return await axios.get(`${todosUrl}?_page=${page}&status=${statusFilter}&_per_page=${pageSize}`).then(response => response.data)
+    }
+
+    return await axios.get(`${todosUrl}?_page=${page}&_per_page=${pageSize}`).then(response => response.data)
   } catch (err) {
     console.error('GET request failed:', err)
     throw err
