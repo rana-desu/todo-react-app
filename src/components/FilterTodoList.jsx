@@ -13,7 +13,7 @@ const FilterTodoList = () => {
   const filterSelected = (status) => setFilter(status)
 
   return (
-    <div className="flex items-center justify-end">
+    <div className="flex items-center justify-end mb-5">
       <label className="ml-3 cursor-pointer" key="all">
         <input 
           type="radio" 

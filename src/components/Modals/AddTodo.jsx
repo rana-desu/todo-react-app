@@ -15,7 +15,7 @@ const dropIn = {
   exit: { opacity: 0, y: -10, transition: { duration: 0.2 } },
 }
 
-const AddTodoForm = () => {
+const AddTodo = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [isAdding, setIsAdding] = useState(false)
@@ -45,16 +45,19 @@ const AddTodoForm = () => {
 
   return (
     <>
+    <AnimatePresence>
     {
       isAdding && (
-        <AnimatePresence>
+        <>
         <motion.div
+          key="backdrop"
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         />
         <motion.form
+          key="add-todo-form"
           onSubmit={handleSubmit} 
           variants={dropIn}
           initial="hidden"
@@ -108,9 +111,10 @@ const AddTodoForm = () => {
             </motion.button>
           </div>
         </motion.form>
-        </AnimatePresence>
+        </>
       )
     }
+    </AnimatePresence>
 
     <div className="flex flex-row items-center justify-end min-w-2xl">
       <motion.button
@@ -128,4 +132,4 @@ const AddTodoForm = () => {
   )
 }
 
-export default AddTodoForm
+export default AddTodo

@@ -15,14 +15,16 @@ const App = () => {
     <div className="page-wrapper overflow-x-auto bg-linear-to-r bg-radial-[at_25%_25%] from-zinc-900 to-black to-70% min-h-screen w-screen">
       <h1 className="w-screen text-center p-8 text-5xl font-bold">TODO App</h1>
       
-      <section className="flex flex-col m-auto w-5xl md:w-3xl mt-5">
+      <section className="flex flex-col m-auto w-7xl mt-5">
         <AddTodo />
       </section>
 
-      <section className="flex flex-col m-auto w-5xl md:w-3xl mt-5">
+      <section className="flex flex-col m-auto w-7xl mt-5">
         <FilterTodos />
         <TodoTable />
       </section>
+
+      <div className="h-[250px] mt-20"></div>
     </div>
   )
 }

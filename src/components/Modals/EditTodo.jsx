@@ -19,7 +19,7 @@ const EditTodoModal = ({ todo, onEdit, onCancel }) => {
   const inputStyles = `p-5 my-2 min-w-2xl border-1 border-zinc-50/10 bg-opacity-[0.01] outline-none rounded-sm w-full`
 
   return (
-    <>
+    <AnimatePresence>
       <motion.div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
         initial={{ opacity: 0 }}
@@ -90,7 +90,7 @@ const EditTodoModal = ({ todo, onEdit, onCancel }) => {
           </div>
         </form>
       </motion.div>
-    </>
+    </AnimatePresence>
   )
 }
 

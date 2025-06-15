@@ -22,7 +22,9 @@ const useTodoStore = create((set, get) => ({
                 description,
                 status: 'pending',
                 remark: '',
-                creationDate: new Date(),
+                overdue: 'false',
+                createdAt: new Date(),
+                order: get().todos.length,
             }
             const returnedTodo = await todoService.create(newTodo)
 

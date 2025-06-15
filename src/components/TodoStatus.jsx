@@ -6,24 +6,24 @@ import RejectedIcon from '../assets/rejected.svg?react'
 
 const statusStyles = {
   pending: {
-    icon: <PendingIcon className="fill-yellow-400 mr-2" />,
-    className: 'border-yellow-500 text-yellow-300',
+    icon: <PendingIcon className="fill-black w-5 h-5" />,
+    className: 'bg-yellow-200',
   },
   'in-progress': {
-    icon: <InProgressIcon className="fill-blue-400 mr-2" />,
-    className: 'border-blue-500 text-blue-300',
+    icon: <InProgressIcon className="fill-black w-5 h-5" />,
+    className: 'bg-blue-200',
   },
   'on-hold': {
-    icon: <OnHoldIcon className="fill-orange-400 mr-2" />,
-    className: 'border-orange-500 text-orange-300',
+    icon: <OnHoldIcon className="fill-black w-5 h-5" />,
+    className: ' bg-orange-200',
   },
   completed: {
-    icon: <CompletedIcon className="fill-green-400 mr-2" />,
-    className: 'border-green-500 text-green-300',
+    icon: <CompletedIcon className="fill-black w-5 h-5" />,
+    className: 'bg-green-200',
   },
   rejected: {
-    icon: <RejectedIcon className="fill-red-400 mr-2" />,
-    className: 'border-red-500 text-red-300',
+    icon: <RejectedIcon className="fill-black w-5 h-5" />,
+    className: 'bg-red-200',
   },
 }
 
@@ -31,9 +31,11 @@ const TodoStatus = ({ status }) => {
   const { icon, className } = statusStyles[status]
 
   return (
-    <div className={`flex flex-row justify-center items-center self-start px-3 py-1 mx-3 my-2 border rounded-full ${className}`}>
-      {icon}
-      <p className="status text-center">
+    <div className={`inline-flex items-center min-w-[130px] gap-2 self-start px-3 py-1 mx-3 my-2 rounded-full ${className}`}>
+      <span className="w-5 flex justify-center">
+        {icon}
+      </span>
+      <p className="status text-center text-black font-medium">
         {status}
       </p>
     </div>

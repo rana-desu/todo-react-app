@@ -20,7 +20,7 @@ const remove = (id) => (
 )
 
 const update = (id, todoObject) => (
-    axios.put(`${todosUrl}/${id}`, todoObject).then(response => response.data)
+  axios.patch(`${todosUrl}/${id}`, todoObject).then(response => response.data)
 )
 
 const getConfig = () => (
