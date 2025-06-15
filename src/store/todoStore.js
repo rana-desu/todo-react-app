@@ -11,8 +11,7 @@ const mapUpdatedTodo = (todos, id, updatedTodo) => (
 const useTodoStore = create((set, get) => ({
     pageCache: {},
     currentPage: 1,
-    pageSize: 10,
-
+    pageSize: 20,
 
     todos: [],
     totalPages: 0, // total pages is calculated based upon current todos
@@ -101,15 +100,15 @@ const useTodoStore = create((set, get) => ({
         }))
     },
 
-    fetchTodos: async () => {
-        const fetchedTodos = await todoService.getAll()
-        console.log('fetching notes...', fetchedTodos)
+    // fetchTodos: async () => {
+    //     const fetchedTodos = await todoService.getAll()
+    //     console.log('fetching notes...', fetchedTodos)
 
-        set(({ todos }) => ({
-            todos: fetchedTodos,
-            totalPages: Math.ceil(todos.length / get().pageSize)
-        }))
-    },
+    //     set(({ todos }) => ({
+    //         todos: fetchedTodos,
+    //         totalPages: Math.ceil(todos.length / get().pageSize)
+    //     }))
+    // },
 
     setFilter: async (status) => {
         const returnedFilter = await todoService.setFilter(status)

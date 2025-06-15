@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import useTodoStore from './store/todoStore'
 
 import { AddTodo } from './components/Modals'
-import FilterTodos from './components/FilterTodoList'
+import FilterTodos from './components/StatusFilters'
 import { TodoTable } from './components/TableView'
 
 const App = () => {
