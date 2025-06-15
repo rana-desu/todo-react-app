@@ -8,7 +8,7 @@ import { TodoTable } from './components/TableView'
 const App = () => {
   // fetches Todos from the backend server on the first render
   useEffect(() => {
-    useTodoStore.getState().fetchTodos()
+    useTodoStore.getState().fetchTodosPage(1)
   }, [])
 
   return (

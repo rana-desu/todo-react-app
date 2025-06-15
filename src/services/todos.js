@@ -5,6 +5,15 @@ const configUrl = 'http://localhost:3001/config'
 
 const getAll = () => axios.get(todosUrl).then(response => response.data)
 
+const getPage = (page, pageSize) => {
+  try {
+    return axios.get(`${todosUrl}?_page=${page}&_per_page=${pageSize}`).then(response => response.data)
+  } catch (err) {
+    console.error('GET request failed:', err)
+    throw err
+  }
+}
+
 const create = async (todoObject) => {
   try {
     const response = await axios.post(todosUrl, todoObject)
@@ -31,4 +40,4 @@ const setFilter = (status) => (
   axios.patch(`${configUrl}/1`, { status }).then(response => response.data)
 )
 
-export default { getAll, create, remove, update, getConfig, setFilter }
+export default { getAll, getPage, create, remove, update, getConfig, setFilter }
