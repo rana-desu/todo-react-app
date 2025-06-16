@@ -25,10 +25,15 @@ const EditTodo = ({ todo, onEdit, onCancel }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
       />
       <motion.div 
         layoutId={`todo-${todo.id}`}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-transparent bg-opacity-1 flex justify-center items-center z-50"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-transparent bg-opacity-1 flex justify-center items-center z-50"
       >
         <form
           onSubmit={handleSubmit}

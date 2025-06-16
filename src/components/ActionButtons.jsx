@@ -5,7 +5,7 @@ import DeleteIcon from '../assets/delete.svg?react'
 import EditIcon from '../assets/edit.svg?react'
 import ViewIcon from '../assets/view.svg?react'
 
-const ActionButtons = ({ onEdit, onDelete }) => {
+const ActionButtons = ({ onView, onEdit, onDelete }) => {
   return (
     <div className="flex items-center justify-center">
       <motion.button
@@ -14,6 +14,7 @@ const ActionButtons = ({ onEdit, onDelete }) => {
           transition: { duration: 1 },
         }}
         whileTap={{ scale: 0.9 }}
+        onClick={onView}
         className="mx-2"
       >
         <ViewIcon 

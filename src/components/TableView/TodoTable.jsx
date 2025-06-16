@@ -1,10 +1,14 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { AnimatePresence } from 'motion/react'
+import { EditTodo, ViewTodo } from '../Modals'
 import useTodoStore from '@/store/todoStore'
 import TodoRow from './TodoRow'
 import PaginateRow from '../PaginateRow'
 
 const TodoTable = () => {
-  const { todos, currentPage, fetchTodosPage } = useTodoStore()
+  const { todos, editTodo, deleteTodo, currentPage, fetchTodosPage } = useTodoStore()
+  const [editingTodo, setEditingTodo] = useState(null)
+  const [viewingTodo, setViewingTodo] = useState(null)
 
   useEffect(() => {
     fetchTodosPage(currentPage)
@@ -30,11 +34,33 @@ const TodoTable = () => {
             <TodoRow
               key={todo.id}
               todo={todo}
+              onEdit={() => setEditingTodo(todo)}
+              onView={() => setViewingTodo(todo)}
+              onDelete={() => deleteTodo(todo.id)}
             />
           ))
         }
       </tbody>
     </table>
+
+    <AnimatePresence>
+    {viewingTodo && (
+      <ViewTodo
+        todo={viewingTodo}
+        onClose={() => setViewingTodo(null)}
+      />
+    )}      
+    </AnimatePresence>
+
+    <AnimatePresence>
+    {editingTodo && (
+      <EditTodo
+        todo={editingTodo}
+        onEdit={editTodo}
+        onCancel={() => setEditingTodo(null)}
+      />
+    )}      
+    </AnimatePresence>
     
     <PaginateRow />
     </>

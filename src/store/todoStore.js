@@ -14,9 +14,9 @@ const useTodoStore = create((set, get) => ({
     pageSize: 20,
 
     todos: [],
-    totalPages: 0, // total pages is calculated based upon current todos
+    totalPages: 0,
     filter: {
-        status: "all", // default status set to all
+        status: "all",
         id: 1
     },
 
@@ -107,16 +107,6 @@ const useTodoStore = create((set, get) => ({
             todos: mapUpdatedTodo(todos, id, returnedTodo)
         }))
     },
-
-    // fetchTodos: async () => {
-    //     const fetchedTodos = await todoService.getAll()
-    //     console.log('fetching notes...', fetchedTodos)
-
-    //     set(({ todos }) => ({
-    //         todos: fetchedTodos,
-    //         totalPages: Math.ceil(todos.length / get().pageSize)
-    //     }))
-    // },
 
     setFilter: async (status) => {
         const { pageSize } = get()
