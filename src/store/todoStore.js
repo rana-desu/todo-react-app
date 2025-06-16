@@ -17,24 +17,35 @@ const useTodoStore = create((set, get) => ({
     totalPages: 0,
     filter: {
         status: "all",
-        id: 1
+        sortBy: "createdAt",
+        sortOrder: "desc",
+        id: 1,
     },
+    sortOrder: 'desc',
 
     fetchTodosPage: async (page) => {
         const { pageCache, pageSize, filter } = get()
-        const status = filter.status
 
-        if (pageCache[status]?.[page]) {
+        if (pageCache[filter.status]?.[page]) {
             set({ 
-                todos: pageCache[status][page], 
+                todos: pageCache[filter.status][page], 
                 currentPage: page
              })
             return
         }
 
-        const returnedPage = await todoService.getPage(page, pageSize, status)
+        const returnedPage = await todoService.getPage(
+            page, 
+            pageSize, 
+            filter.status,
+            filter.sortBy,
+            filter.sortOrder
+        )
+
         const { data, ...info } = returnedPage
         console.log(page, returnedPage)
+
+        console.log('info from returnedPage', info)
 
         set((state) => ({
             todos: data,
@@ -42,8 +53,8 @@ const useTodoStore = create((set, get) => ({
             currentPage: page,
             pageCache: {
                 ...state.pageCache,
-                [status]: {
-                    ...(state.pageCache[status] || {}),
+                [filter.status]: {
+                    ...(state.pageCache[filter.status] || {}),
                     [page]: data,
                 }
             }
@@ -108,24 +119,47 @@ const useTodoStore = create((set, get) => ({
         }))
     },
 
-    setFilter: async (status) => {
+    setFilter: async (status, sortBy = 'createdAt', sortOrder = 'desc') => {
         const { pageSize } = get()
 
         const returnedFilter = await todoService.setFilter(status)
-        const firstPage = await todoService.getPage(1, pageSize, status)
+        const firstPage = await todoService.getPage(1, pageSize, status, sortBy, sortOrder)
 
         set({
-            filter: returnedFilter,
+            filter: {
+                ...returnedFilter,
+                sortBy,
+                sortOrder,
+            },
             todos: firstPage.data,
             totalPages: firstPage.pages,
             currentPage: 1,
             pageCache: {
-            [status]: {
-                1: firstPage.data
-            }
+                [status]: {
+                    1: firstPage.data
+                }
             }
         })
     },
+
+    sortTodos: (sortOrder) => {
+        const { todos } = get()
+        console.log('todos to sort in sortedTodos:', todos)
+
+        const sorted = [...todos].sort((a, b) => {
+            const dateA = new Date(a.createdAt)
+            const dateB = new Date(b.createdAt)
+
+            return (sortOrder === 'asc')
+                ? dateA - dateB
+                : dateB - dateA
+        })
+
+        set({ 
+            todos: sorted,
+            sortOrder: sortOrder
+        })
+    }
 }))
 
 export default useTodoStore

@@ -5,13 +5,22 @@ const configUrl = 'http://localhost:3001/config'
 
 const getAll = () => axios.get(todosUrl).then(response => response.data)
 
-const getPage = async (page, pageSize, statusFilter) => {
+/* getPage: 
+   retrieve a page of a fixed size (as requested by the client) from the backend server.
+   statusFilter: pending, rejected, completed, etc.
+   sortBy: sorts by the provided property in ASC order.
+ */
+const getPage = async (page, pageSize, statusFilter, sortBy = 'createdAt', sortOrder = 'desc') => {
   try {
-    if (statusFilter !== 'all') {
-      return await axios.get(`${todosUrl}?_page=${page}&status=${statusFilter}&_per_page=${pageSize}`).then(response => response.data)
-    }
+    const baseUrl = `${todosUrl}?_page=${page}&_per_page=${pageSize}&_sort=${sortBy}&_order=${sortOrder}`
+    const url = (statusFilter === 'all')
+      ? baseUrl
+      : `${baseUrl}&status=${statusFilter}`
 
-    return await axios.get(`${todosUrl}?_page=${page}&_per_page=${pageSize}`).then(response => response.data)
+    const returnedPage = await axios.get(url).then(response => response.data)
+    console.log('returned page from backend:', returnedPage)
+    return returnedPage
+
   } catch (err) {
     console.error('GET request failed:', err)
     throw err

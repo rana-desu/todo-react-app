@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'motion/react'
-import useTodoStore from '../store/todoStore'
+import useTodoStore from '@/store/todoStore'
 
 const StatusFilters = () => {
   const statuses = [
@@ -18,7 +18,7 @@ const StatusFilters = () => {
   console.log("current filter", filter)
 
   return (
-    <div className="flex items-center justify-end mb-5">
+    <div className="flex items-center justify-end">
       {
         statuses.map((status) => (
           <label

@@ -2,6 +2,7 @@ import useTodoStore from '@/store/todoStore'
 
 const PaginateRow = () => {
   const { currentPage, totalPages, fetchTodosPage } = useTodoStore()
+  console.log('totalPages in PaginateRow', totalPages)
 
   return (
     <div className="m-auto mt-5 flex gap-2">

@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import useTodoStore from './store/todoStore'
 
 import { AddTodo } from './components/Modals'
-import FilterTodos from './components/StatusFilters'
 import { TodoTable } from './components/TableView'
 
 const App = () => {
@@ -20,7 +19,6 @@ const App = () => {
       </section>
 
       <section className="flex flex-col m-auto w-7xl mt-5">
-        <FilterTodos />
         <TodoTable />
       </section>
 

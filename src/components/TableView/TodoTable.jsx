@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'motion/react'
 import { EditTodo, ViewTodo } from '../Modals'
+import { FiltersBar } from '../Filters'
 import useTodoStore from '@/store/todoStore'
 import TodoRow from './TodoRow'
 import PaginateRow from '../PaginateRow'
 
 const TodoTable = () => {
-  const { todos, editTodo, deleteTodo, currentPage, fetchTodosPage } = useTodoStore()
+  const { 
+    todos, 
+    editTodo, 
+    deleteTodo, 
+    currentPage, 
+    fetchTodosPage,
+   } = useTodoStore()
+
   const [editingTodo, setEditingTodo] = useState(null)
   const [viewingTodo, setViewingTodo] = useState(null)
-
+  
   useEffect(() => {
     fetchTodosPage(currentPage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -17,6 +25,8 @@ const TodoTable = () => {
 
   return (
     <>
+    <FiltersBar />
+
     <table className="min-w-full table-fixed border-collapse border border-zinc-50/10 divide-y divide-gray-200/50">
       <thead className="divide-x divide-zinc-50/10">
         <tr>

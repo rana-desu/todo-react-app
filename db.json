@@ -51,16 +51,6 @@
       "order": 4
     },
     {
-      "id": "39dd",
-      "title": "Run tests",
-      "description": "Auto-generated todo",
-      "status": "pending",
-      "remark": "urgent",
-      "overdue": "false",
-      "createdAt": "2025-05-22T21:20:33.530560",
-      "order": 5
-    },
-    {
       "id": "ffcb",
       "title": "Run tests",
       "description": "Auto-generated todo",
@@ -659,16 +649,6 @@
       "overdue": "false",
       "createdAt": "2025-06-07T05:20:33.532308",
       "order": 65
-    },
-    {
-      "id": "4f3b",
-      "title": "Improve accessibility",
-      "description": "Auto-generated todo",
-      "status": "completed",
-      "remark": "",
-      "overdue": "true",
-      "createdAt": "2025-05-23T02:20:33.532355",
-      "order": 66
     },
     {
       "id": "adba",
