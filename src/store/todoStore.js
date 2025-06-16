@@ -21,7 +21,7 @@ const useTodoStore = create((set, get) => ({
         sortOrder: "desc",
         id: 1,
     },
-    sortOrder: 'desc',
+    sortOrder: 'asc',
 
     fetchTodosPage: async (page) => {
         const { pageCache, pageSize, filter } = get()

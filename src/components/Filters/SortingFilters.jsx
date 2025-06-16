@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'motion/react'
 
-// import useTodoStore from '../store/todoStore'
+import useTodoStore from '@/store/todoStore'
 import SortIcon from '@/assets/sort.svg?react'
 
 
@@ -53,8 +53,11 @@ const SortingFilters = ({ onOldest, onLatest }) => {
   //   )
   // }
 
+  const { sortOrder } = useTodoStore()
+  console.log('sort order changed to:', sortOrder)
+
   return (
-    <div ref={dropdownRef} className="flex flex-row justify-center items-center mx-3 my-2 relative">
+    <div ref={dropdownRef} className="flex flex-row justify-center items-center mr-3 my-2 relative">
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.98 }}
@@ -79,7 +82,7 @@ const SortingFilters = ({ onOldest, onLatest }) => {
               <button
                 type="button"
                 onClick={onOldest}
-                className="flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded"
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded ${sortOrder === 'asc' ? 'bg-white text-black' : ''}`}
               >
                 Oldest
               </button>
@@ -87,7 +90,7 @@ const SortingFilters = ({ onOldest, onLatest }) => {
               <button
                 type="button"
                 onClick={onLatest}
-                className="flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded"
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded ${sortOrder === 'desc' ? 'bg-white text-black' : ''}`}
               >
                 Latest
               </button>
