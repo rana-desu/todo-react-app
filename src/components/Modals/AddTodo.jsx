@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 
 import useTodoStore from '../../store/todoStore'
+import ModalBackdrop from './ModalBackdrop'
 import AddIcon from '../../assets/add.svg?react'
 
 const dropIn = {
@@ -49,13 +50,7 @@ const AddTodo = () => {
     {
       isAdding && (
         <>
-        <motion.div
-          key="backdrop"
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        />
+        <ModalBackdrop />
         <motion.form
           key="add-todo-form"
           onSubmit={handleSubmit} 

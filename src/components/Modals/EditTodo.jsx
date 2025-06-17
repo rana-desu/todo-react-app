@@ -1,6 +1,7 @@
 import { useState } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'motion/react'
+import ModalBackdrop from './ModalBackdrop'
 
 const EditTodo = ({ todo, onEdit, onCancel }) => {
   const [title, setTitle] = useState(todo.title)
@@ -20,13 +21,7 @@ const EditTodo = ({ todo, onEdit, onCancel }) => {
 
   return (
     <>
-      <motion.div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.25, ease: 'easeOut' }}
-      />
+      <ModalBackdrop />
       <motion.div 
         layoutId={`todo-${todo.id}`}
         initial={{ opacity: 0, scale: 0.95 }}

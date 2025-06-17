@@ -14,6 +14,7 @@ const useTodoStore = create((set, get) => ({
     pageSize: 20,
 
     todos: [],
+    allTodos: [],
     totalPages: 0,
     filter: {
         status: "all",
@@ -22,6 +23,7 @@ const useTodoStore = create((set, get) => ({
         id: 1,
     },
     sortOrder: 'asc',
+    searchTerm: '',
 
     fetchTodosPage: async (page) => {
         const { pageCache, pageSize, filter } = get()
@@ -49,6 +51,7 @@ const useTodoStore = create((set, get) => ({
 
         set((state) => ({
             todos: data,
+            allTodos: data,
             totalPages: info.pages,
             currentPage: page,
             pageCache: {
@@ -159,7 +162,22 @@ const useTodoStore = create((set, get) => ({
             todos: sorted,
             sortOrder: sortOrder
         })
-    }
+    },
+
+    searchTodos: (searchTerm) => {
+        const { allTodos } = get()
+
+        const searchResult = allTodos.filter(todo => (
+            todo.title.toLowerCase().includes(searchTerm.toLowerCase())
+            || todo.description.toLowerCase().includes(searchTerm.toLowerCase())
+            || todo.remark.toLowerCase().includes(searchTerm.toLowerCase())
+        ))
+
+        set({
+            todos: searchResult,
+            searchTerm: searchTerm
+        })
+    },
 }))
 
 export default useTodoStore

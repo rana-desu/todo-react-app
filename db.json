@@ -24,8 +24,8 @@
       "id": "815a",
       "title": "Deploy to staging",
       "description": "Auto-generated todo",
-      "status": "pending",
-      "remark": "needs changes",
+      "status": "on-hold",
+      "remark": "",
       "overdue": "false",
       "createdAt": "2025-05-03T09:00:00",
       "order": 3
