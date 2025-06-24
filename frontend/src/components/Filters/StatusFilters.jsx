@@ -12,10 +12,10 @@ const StatusFilters = () => {
     'rejected',
   ]
 
-  const { filter, setFilter } = useTodoStore()
+  const { statusFilter, setFilter } = useTodoStore()
   const filterSelected = (status) => setFilter(status)
 
-  console.log("current filter", filter)
+  console.log("current filter", statusFilter)
 
   return (
     <div className="flex items-center justify-end">
@@ -23,13 +23,13 @@ const StatusFilters = () => {
         statuses.map((status) => (
           <label
             key={status}
-            className={`relative ml-3 cursor-pointer transition rounded-full px-3 py-1 ${filter.status === status ? '' : 'hover:bg-zinc-50/10'}`}
+            className={`relative ml-3 cursor-pointer transition rounded-full px-3 py-1 ${statusFilter === status ? '' : 'hover:bg-zinc-50/10'}`}
           >
             <input 
               type="radio" 
               name="todo-status"
               value={status}
-              checked={status === filter.status}
+              checked={status === statusFilter}
               onChange={(e) => filterSelected(e.target.value)}
               className="hidden"
             />
@@ -38,7 +38,7 @@ const StatusFilters = () => {
             </span>
             
             {
-              filter.status === status && (
+              statusFilter === status && (
                 <motion.span 
                   layoutId="statsues"
                   className="absolute inset-0 z-10 bg-white mix-blend-difference"

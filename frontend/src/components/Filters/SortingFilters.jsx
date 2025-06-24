@@ -36,23 +36,6 @@ const SortingFilters = ({ onOldest, onLatest }) => {
     }
   }, [])
 
-  // const { setFilter } = useTodoStore()
-
-  // const handleLatest = () => {
-  //   setFilter(
-  //     useTodoStore.getState().filter.status,
-  //     'createdAt',
-  //     'desc'
-  //   )
-  // }
-  // const handleOldest = () => {
-  //   setFilter(
-  //     useTodoStore.getState().filter.status,
-  //     'createdAt',
-  //     'asc'
-  //   )
-  // }
-
   const { sortOrder } = useTodoStore()
   console.log('sort order changed to:', sortOrder)
 
@@ -76,23 +59,23 @@ const SortingFilters = ({ onOldest, onLatest }) => {
             animate="visible"
             exit="exit"
             variants={actionDropdownVariants}
-            className="absolute top-full mt-2 w-40 shadow-lg"
+            className="absolute top-full w-40 shadow-lg"
           >
-            <div className="bg-black text-white text-sm rounded-[6px] border border-zinc-50/10 bg-opacity-[0.01] p-1">
+            <div className="bg-black text-white text-sm rounded-[6px] border border-zinc-50/10 bg-opacity-[0.01] px-1">
               <button
                 type="button"
                 onClick={onOldest}
-                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded ${sortOrder === 'asc' ? 'bg-white text-black' : ''}`}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'asc' ? 'bg-white text-black' : ''}`}
               >
-                Oldest
+                Oldest First
               </button>
               
               <button
                 type="button"
                 onClick={onLatest}
-                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 hover:bg-white hover:text-black rounded ${sortOrder === 'desc' ? 'bg-white text-black' : ''}`}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'desc' ? 'bg-white text-black' : ''}`}
               >
-                Latest
+                Latest First
               </button>
             </div>
           </motion.div>

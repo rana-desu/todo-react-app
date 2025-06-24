@@ -1,0 +1,9 @@
+PATCH http://localhost:3001/api/todos/685aae4078803c844cb9e2b4
+Content-Type: application/json
+
+{
+    "title": "patched title",
+    "description": "patched desc",
+    "remark": "",
+    "status": "completed"
+}
