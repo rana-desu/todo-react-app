@@ -1,0 +1,12 @@
+feature/statuses:
+
+- decayed TodoForm into: CreateForm and EditForm.
+- migrated from useState to useReducer to handle state logic for a component.
+- add title, description, statuses to each todo item.
+
+2025-06-15
+feature/tableview:
+- categorised components into more sub-categories.
+- added index.js file for cleaner imports.
+
+
