@@ -6,16 +6,6 @@ import useTodoStore from '../../store/todoStore'
 import ModalBackdrop from './ModalBackdrop'
 import AddIcon from '../../assets/add.svg?react'
 
-const dropIn = {
-  hidden: { opacity: 0, y: -10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 20 }
-  },
-  exit: { opacity: 0, y: -10, transition: { duration: 0.2 } },
-}
-
 const AddTodo = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -54,11 +44,11 @@ const AddTodo = () => {
         <motion.form
           key="add-todo-form"
           onSubmit={handleSubmit} 
-          variants={dropIn}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          className="flex flex-col items-center justify-center z-50 p-8 w-full border border-zinc-50/10 bg-opacity-[0.01] rounded-[6px]"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}      
+          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-opacity-1 flex flex-col justify-center items-center z-50 bg-black p-6 rounded-lg border-1 border-zinc-50/10 bg-opacity-[0.01] w-3xl"
         > 
           <div className="flex flex-col items-center">
             <input
@@ -87,18 +77,18 @@ const AddTodo = () => {
             />
           </div>
 
-          <div className="flex flex-row items-center justify-end min-w-2xl">
+          <div className="flex flex-row items-center justify-end min-w-2xl gap-4">
             <button
               type="button"
-              className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border-1 border-zinc-50/10 min-w-50 font-medium rounded-sm text-white "
+              className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border border-zinc-50/10 min-w-50 font-medium rounded-sm text-white bg-zinc-50/10"
               onClick={() => setIsAdding(false)}
             >
-              Cancel
+              cancel
             </button>    
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.85 }}
-              className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-sm btn-grad"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-md bg-amber-50"
               type="submit"
             >
               <AddIcon className="fill-black mr-2"/>
@@ -113,9 +103,9 @@ const AddTodo = () => {
 
     <div className="flex flex-row items-center justify-end min-w-2xl">
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.85 }}
-        className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-sm btn-grad"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.95 }}
+        className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-md bg-amber-50"
         onClick={() => setIsAdding(true)}
         type="button"
       >

@@ -47,9 +47,9 @@ const SortingFilters = ({ onOldest, onLatest }) => {
         onHoverStart={() => console.log('hover started!')}
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="px-4 py-2 border border-zinc-50/10 bg-opacity-[0.01] rounded text-shadow-md text-white cursor-pointer"
+        className="px-4 py-2 border border-zinc-50/10 bg-opacity-[0.01] rounded text-shadow-md text-zinc-50/50 cursor-pointer"
       >
-        <SortIcon />
+        <SortIcon className="fill-zinc-50/50"/>
       </motion.button>
 
       <AnimatePresence>

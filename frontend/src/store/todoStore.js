@@ -15,11 +15,13 @@ const useTodoStore = create((set, get) => ({
 
     statusFilter: 'all',
     sortOrder: 'asc',
+    searchBy: 'title',
+    searchTerm: '',
 
     fetchTodosPage: async (page) => {
-        const { pageSize, statusFilter, sortOrder } = get()
+        const { searchBy, searchTerm, statusFilter, pageSize, sortOrder } = get()
 
-        const returnedPage = await todoService.getPage(page, pageSize, statusFilter, sortOrder)
+        const returnedPage = await todoService.getPage(searchBy, searchTerm, statusFilter, page, pageSize, sortOrder)
         const { data, ...info } = returnedPage
 
         set(() => ({
@@ -80,34 +82,24 @@ const useTodoStore = create((set, get) => ({
     },
 
     setFilter: async (status) => {
-        const firstPage = await todoService.getPage(1, get().pageSize, status)
+        set({ statusFilter: status })
 
-        set({
-            todos: firstPage.data,
-            totalPages: firstPage.totalPages,
-            currentPage: 1,
-            statusFilter: status,
-        })
+        get().fetchTodosPage(1)
     },
 
     sortTodos: async (sortOrder) => {
         set({ sortOrder: sortOrder })
-        await get().fetchTodosPage(1)
+
+        get().fetchTodosPage(1)
     },
 
-    searchTodos: (searchTerm) => {
-        const { allTodos } = get()
-
-        const searchResult = allTodos.filter(todo => (
-            todo.title.toLowerCase().includes(searchTerm.toLowerCase())
-            || todo.description.toLowerCase().includes(searchTerm.toLowerCase())
-            || todo.remark.toLowerCase().includes(searchTerm.toLowerCase())
-        ))
-
+    searchTodos: (searchBy, searchTerm) => {
         set({
-            todos: searchResult,
+            searchBy: searchBy,
             searchTerm: searchTerm
         })
+
+        get().fetchTodosPage(get().currentPage)
     },
 }))
 
