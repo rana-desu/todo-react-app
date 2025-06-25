@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/todos?sort=createdAt&order=desc&page=1&limit=10
+GET http://localhost:3001/api/todos?status=completed&sort=createdAt&order=desc&page=1&limit=10&searchBy=title&searchTerm=todo
