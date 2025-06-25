@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/todos
+Content-Type: application/json
+
+{
+    "title": "fifth note",
+    "description": "1",
+    "status": "completed"
+}

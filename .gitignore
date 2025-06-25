@@ -26,3 +26,6 @@ dist-ssr
 # too late, I already pushed these to my repo (FUCK ME)
 change-log.txt
 db.json.bak
+
+.vite
+.env

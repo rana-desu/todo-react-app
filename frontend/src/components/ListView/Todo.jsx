@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import useTodoStore from '../../store/todoStore'
 
 import TodoStatus from '../TodoStatus'
-import TodoContent from './TodoContent'
+import TodoContent from '../TodoContent'
 import Categories from '../Categories'
 import ActionDropdown from '../ActionDropdown'
 import EditTodoModal from '../Modals/EditTodo'
