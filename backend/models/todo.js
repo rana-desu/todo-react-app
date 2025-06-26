@@ -13,6 +13,14 @@ const todoSchema = mongoose.Schema({
         type: String,
         default: "pending",
     },
+    categories: {
+        type: Object,
+        default: {
+            work: false,
+            home: false,
+            chore: false,
+        }
+    },
     overdue: {
         type: Boolean,
         default: false,

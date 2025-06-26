@@ -4,7 +4,9 @@ import { motion, AnimatePresence } from 'motion/react'
 
 import useTodoStore from '../../store/todoStore'
 import ModalBackdrop from './ModalBackdrop'
+import CategoriesDropdown from '../CategoriesDropdown'
 import AddIcon from '../../assets/add.svg?react'
+
 
 const AddTodo = () => {
   const [title, setTitle] = useState('')
@@ -78,6 +80,8 @@ const AddTodo = () => {
           </div>
 
           <div className="flex flex-row items-center justify-end min-w-2xl gap-4">
+            <CategoriesDropdown />
+            
             <button
               type="button"
               className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border border-zinc-50/10 min-w-50 font-medium rounded-sm text-white bg-zinc-50/10"

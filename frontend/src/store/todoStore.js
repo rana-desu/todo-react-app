@@ -7,7 +7,7 @@ const mapUpdatedTodo = (todos, id, updatedTodo) => (
 
 const useTodoStore = create((set, get) => ({
     currentPage: 1,
-    pageSize: 10,
+    pageSize: 5,
     totalPages: 0,
 
     todos: [],
