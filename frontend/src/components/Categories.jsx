@@ -1,4 +1,4 @@
-const Categories = () => {
+const Categories = ({ categories }) => {
   const categoryStyles = `
     border border-zinc-50/10 bg-opacity-[0.01] rounded-full 
     my-3 px-6 py-2 mr-2 
@@ -6,17 +6,15 @@ const Categories = () => {
     hover:bg-white hover:text-black
   `
   
+  console.log('categories in component', categories)
+
   return (
-    <div className="categories">
-      <button type="button" className={categoryStyles}>
-        home
-      </button>
-      <button type="button" className={categoryStyles}>
-        work
-      </button>
-      <button type="button" className={categoryStyles}>
-        studies
-      </button>
+    <div className="categories flex">
+      {categories.map(category => (
+        <div className={categoryStyles}>
+          {category}
+        </div>
+      ))}
     </div>
   )
 }

@@ -4,5 +4,6 @@ Content-Type: application/json
 {
     "title": "fifth note",
     "description": "1",
-    "status": "completed"
+    "status": "completed",
+    "categories": ["work", "personal"]
 }

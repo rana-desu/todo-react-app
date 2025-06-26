@@ -12,7 +12,7 @@ const TodoRow = ({ todo, onView, onEdit, onDelete }) => {
           <TodoStatus status={todo.status}/>
         </div>
       </td>
-      <td className="text-sm text-center"><Categories /></td>
+      <td className="text-sm text-center"><Categories categories={todo.categories}/></td>
       <td className="text-sm text-center">
         <ActionButtons 
           onDelete={onDelete} 

@@ -11,6 +11,7 @@ import AddIcon from '../../assets/add.svg?react'
 const AddTodo = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [categories, setCategories] = useState([])
   const [isAdding, setIsAdding] = useState(false)
 
   const addTodo = useTodoStore((state) => state.addTodo)
@@ -21,11 +22,13 @@ const AddTodo = () => {
     e.preventDefault()
 
     try {
-      if (title.trim() && description) {
-        await addTodo(title.trim(), description)
+      if (title.trim() && description && categories) {
+        await addTodo(title.trim(), description, categories)
         handleCancel()
+        
         setTitle('')
         setDescription('')
+        setCategories([])
       } else {
         alert('please enter non-empty inputs.')
       }
@@ -79,25 +82,30 @@ const AddTodo = () => {
             />
           </div>
 
-          <div className="flex flex-row items-center justify-end min-w-2xl gap-4">
-            <CategoriesDropdown />
+          <div className="flex flex-row items-center justify-between min-w-2xl gap-4">
+            <CategoriesDropdown 
+              selectedCategories={categories}
+              setSelectedCategories={setCategories}
+            />
             
-            <button
-              type="button"
-              className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border border-zinc-50/10 min-w-50 font-medium rounded-sm text-white bg-zinc-50/10"
-              onClick={() => setIsAdding(false)}
-            >
-              cancel
-            </button>    
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-md bg-amber-50"
-              type="submit"
-            >
-              <AddIcon className="fill-black mr-2"/>
-              <p>add todo!</p>
-            </motion.button>
+            <div className="flex gap-4">
+              <button
+                type="button"
+                className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border border-zinc-50/10 min-w-50 font-medium rounded-sm text-white bg-zinc-50/10"
+                onClick={() => setIsAdding(false)}
+              >
+                cancel
+              </button>    
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex flex-row self-end item-center justify-center cursor-pointer px-4 py-3 my-5 border min-w-50 text-black font-medium rounded-md bg-amber-50"
+                type="submit"
+              >
+                <AddIcon className="fill-black mr-2"/>
+                <p>add todo!</p>
+              </motion.button>
+            </div>
           </div>
         </motion.form>
         </>

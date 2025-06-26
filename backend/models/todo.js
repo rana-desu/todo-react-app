@@ -11,14 +11,23 @@ const todoSchema = mongoose.Schema({
     remark: String,
     status: {
         type: String,
-        default: "pending",
+        enum: [
+            'pending', 
+            'in-progress', 
+            'on-hold', 
+            'completed', 
+            'rejected'
+        ],
+        default: 'pending',
     },
     categories: {
-        type: Object,
-        default: {
-            work: false,
-            home: false,
-            chore: false,
+        type: [String],
+        enum: ['work', 'personal', 'chores'],
+        default: [],
+        required: true,
+        validate: {
+            validator: (val) => Array.isArray(val) && val.length > 0,
+            message: 'at least provide with one category for the TODO.'
         }
     },
     overdue: {

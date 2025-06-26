@@ -38,6 +38,7 @@ todosRouter.post('/', (request, response, next) => {
         title: body.title,
         description: body.description,
         status: body.status || 'pending',
+        categories: body.categories,
     })
 
     todo.save()

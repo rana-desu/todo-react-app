@@ -11,7 +11,7 @@ const useTodoStore = create((set, get) => ({
     totalPages: 0,
 
     todos: [],
-    allTodos: [],
+    categories: [],
 
     statusFilter: 'all',
     sortOrder: 'asc',
@@ -31,12 +31,13 @@ const useTodoStore = create((set, get) => ({
         }))
     },
 
-    addTodo: async (title, description) => {
+    addTodo: async (title, description, categories) => {
         try {
             const newTodo = {
                 title,
                 description,
                 status: 'pending',
+                categories,
                 remark: '',
                 overdue: 'false',
                 createdAt: new Date(),
