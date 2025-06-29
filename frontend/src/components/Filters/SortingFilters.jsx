@@ -62,13 +62,13 @@ const SortingFilters = ({ onOldest, onLatest, onFilterByCategory }) => {
             className="absolute top-full w-40 shadow-lg"
           >
             <div className="bg-black text-white text-sm rounded-[6px] border border-zinc-50/10 bg-opacity-[0.01] px-1">
-              <span className="px-2 py-1 text-zinc-50/50">
+              <span className="flex border border-zinc-50/10 px-2 py-1 text-zinc-50/50">
                 sort by date
               </span>
               <button
                 type="button"
                 onClick={onOldest}
-                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'asc' ? 'border-l' : ''}`}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white rounded hover:text-black ${sortOrder === 'asc' ? 'text-white' : 'text-zinc-50/50'}`}
               >
                 Oldest First
               </button>
@@ -76,12 +76,12 @@ const SortingFilters = ({ onOldest, onLatest, onFilterByCategory }) => {
               <button
                 type="button"
                 onClick={onLatest}
-                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'desc' ? 'border-l' : ''}`}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white rounded hover:text-black ${sortOrder === 'desc' ? 'text-white' : 'text-zinc-50/50'}`}
               >
                 Latest First
               </button>
 
-              <span className="px-2 py-1 text-zinc-50/50">
+              <span className="flex border border-zinc-50/10 px-2 py-1 text-zinc-50/50">
                 filter by categories
               </span>
 

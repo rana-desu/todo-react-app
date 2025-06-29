@@ -8,9 +8,11 @@ import PaginateRow from '../PaginateRow'
 
 const TodoTable = () => {
   const { 
-    todos, 
+    todos,
+    currentSerials,
     editTodo, 
-    deleteTodo, 
+    deleteTodo,
+    pageSize, 
     currentPage, 
     fetchTodosPage,
    } = useTodoStore()
@@ -40,10 +42,11 @@ const TodoTable = () => {
 
       <tbody className="divide-y divide-x divide-zinc-50/10">
         {
-          todos.map(todo => (
+          todos.map((todo, index) => (
             <TodoRow
               key={todo.id}
               todo={todo}
+              serial={((currentPage - 1) * pageSize) + currentSerials[index]}
               onEdit={() => setEditingTodo(todo)}
               onView={() => setViewingTodo(todo)}
               onDelete={() => deleteTodo(todo.id)}

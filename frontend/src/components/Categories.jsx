@@ -10,8 +10,8 @@ const Categories = ({ categories }) => {
 
   return (
     <div className="categories flex">
-      {categories.map(category => (
-        <div className={categoryStyles}>
+      {categories.map((category, index) => (
+        <div key={index} className={categoryStyles}>
           {category}
         </div>
       ))}

@@ -9,8 +9,10 @@ const useTodoStore = create((set, get) => ({
     currentPage: 1,
     pageSize: 5,
     totalPages: 0,
+    totalTodos: 0,
 
     todos: [],
+    currentSerials: [],
 
     statusFilter: 'all',
     categoryFilter: [],
@@ -32,9 +34,17 @@ const useTodoStore = create((set, get) => ({
         )
         const { data, ...info } = returnedPage
 
+        let newSerials = []
+
+        for (let i = 0; i < get().totalTodos; i++) {
+            newSerials[i] = i + 1
+        }
+
         set(() => ({
             todos: data,
             totalPages: info.totalPages,
+            totalTodos: info.totalTodos,
+            currentSerials: newSerials,
             currentPage: page
         }))
     },
@@ -93,7 +103,7 @@ const useTodoStore = create((set, get) => ({
     setFilter: async (status) => {
         set({ statusFilter: status })
 
-        get().fetchTodosPage(1)
+        get().fetchTodosPage(get().currentPage)
     },
 
     sortTodos: async (sortOrder) => {
@@ -124,9 +134,24 @@ const useTodoStore = create((set, get) => ({
             }
         })
 
-        console.log('current category filters:', get().categoryFilter)
         get().fetchTodosPage(get().currentPage)
-    }
+    },
+
+    serialize: () => {
+        set(() => {
+            let newSerials = []
+
+            for (let i = 0; i < get().totalTodos; i++) {
+                newSerials[i] = i + 1
+            }
+
+            console.log('new serials for current pages:', newSerials)
+
+            return (
+                { currentSerials: newSerials }
+            )
+        })
+    },
 }))
 
 export default useTodoStore
