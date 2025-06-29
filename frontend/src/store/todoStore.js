@@ -32,20 +32,21 @@ const useTodoStore = create((set, get) => ({
             pageSize, 
             sortOrder
         )
+        
         const { data, ...info } = returnedPage
-
-        let newSerials = []
-
-        for (let i = 0; i < get().totalTodos; i++) {
-            newSerials[i] = i + 1
-        }
-
         set(() => ({
             todos: data,
             totalPages: info.totalPages,
             totalTodos: info.totalTodos,
-            currentSerials: newSerials,
             currentPage: page
+        }))
+
+        let newSerials = []
+        for (let i = 0; i < get().totalTodos; i++) {
+            newSerials[i] = i + 1
+        }
+        set(() => ({
+            currentSerials: newSerials
         }))
     },
 

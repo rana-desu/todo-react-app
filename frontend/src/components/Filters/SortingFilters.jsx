@@ -62,7 +62,7 @@ const SortingFilters = ({ onOldest, onLatest, onFilterByCategory }) => {
             className="absolute top-full w-40 shadow-lg"
           >
             <div className="bg-black text-white text-sm rounded-[6px] border border-zinc-50/10 bg-opacity-[0.01] px-1">
-              <span className="flex border border-zinc-50/10 px-2 py-1 text-zinc-50/50">
+              <span className="flex border border-zinc-50/10 px-2 py-1 mt-1 text-zinc-50/50">
                 sort by date
               </span>
               <button
