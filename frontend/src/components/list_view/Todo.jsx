@@ -5,9 +5,9 @@ import useTodoStore from '../../store/todoStore'
 
 import TodoStatus from '../TodoStatus'
 import TodoContent from '../TodoContent'
-import Categories from '../Categories'
+import Categories from '../utils/Categories'
 import ActionDropdown from '../ActionDropdown'
-import EditTodoModal from '../Modals/EditTodo'
+import EditTodoModal from '../modals/EditTodo'
 
 const Todo = ({ todo }) => {
   const [isEditTodoModal, setIsEditTodoModal] = useState(false)

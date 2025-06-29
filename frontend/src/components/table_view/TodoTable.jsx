@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'motion/react'
-import { EditTodo, ViewTodo } from '../Modals'
-import { FiltersBar } from '../Filters'
+import { EditTodo, ViewTodo } from '../modals'
+import { FiltersBar } from '../filters'
 import useTodoStore from '@/store/todoStore'
 import TodoRow from './TodoRow'
-import PaginateRow from '../PaginateRow'
+import PaginateRow from '../utils/PaginateRow'
 
 const TodoTable = () => {
   const { 

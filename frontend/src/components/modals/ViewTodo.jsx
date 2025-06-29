@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react'
 
-import TodoContent from '../TodoContent'
-import TodoStatus from '../TodoStatus'
-import Categories from '../Categories'
+import TodoContent from '../utils/TodoContent'
+import TodoStatus from '../utils/TodoStatus'
+import Categories from '../utils/Categories'
 import ModalBackdrop from './ModalBackdrop'
 import CloseIcon from '@/assets/delete.svg?react'
 
@@ -42,7 +42,7 @@ const ViewTodo = ({ todo, onClose }) => {
       </div>
 
       <div className="flex flex-row justify-between actions w-full border-t px-2 border-zinc-50/10">
-        <Categories />
+        <Categories categories={todo.categories}/>
       </div>
     </motion.div>
     </>

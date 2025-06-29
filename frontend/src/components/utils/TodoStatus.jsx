@@ -1,8 +1,8 @@
-import PendingIcon from '../assets/pending.svg?react'
-import CompletedIcon from '../assets/completed.svg?react'
-import InProgressIcon from '../assets/in-progress.svg?react'
-import OnHoldIcon from '../assets/on-hold.svg?react'
-import RejectedIcon from '../assets/rejected.svg?react'
+import PendingIcon from '@/assets/pending.svg?react'
+import CompletedIcon from '@/assets/completed.svg?react'
+import InProgressIcon from '@/assets/in-progress.svg?react'
+import OnHoldIcon from '@/assets/on-hold.svg?react'
+import RejectedIcon from '@/assets/rejected.svg?react'
 
 const statusStyles = {
   pending: {

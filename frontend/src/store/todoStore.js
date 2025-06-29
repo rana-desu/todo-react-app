@@ -104,7 +104,7 @@ const useTodoStore = create((set, get) => ({
     setFilter: async (status) => {
         set({ statusFilter: status })
 
-        get().fetchTodosPage(get().currentPage)
+        get().fetchTodosPage(1)
     },
 
     sortTodos: async (sortOrder) => {

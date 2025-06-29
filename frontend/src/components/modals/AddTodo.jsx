@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react'
 
 import useTodoStore from '../../store/todoStore'
 import ModalBackdrop from './ModalBackdrop'
-import CategoriesDropdown from '../CategoriesDropdown'
+import CategoriesDropdown from '../utils/CategoriesDropdown'
 import AddIcon from '../../assets/add.svg?react'
 
 

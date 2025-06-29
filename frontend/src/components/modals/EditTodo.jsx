@@ -6,7 +6,7 @@ import ModalBackdrop from './ModalBackdrop'
 const EditTodo = ({ todo, onEdit, onCancel }) => {
   const [title, setTitle] = useState(todo.title)
   const [description, setDescription] = useState(todo.description)
-  const [remark, setRemark] = useState("")
+  const [remark, setRemark] = useState(todo.remark)
   const [status, setStatus] = useState(todo.status)
 
   const handleSubmit = async (e) => {
@@ -68,6 +68,7 @@ const EditTodo = ({ todo, onEdit, onCancel }) => {
                 className={inputStyles}
                 placeholder="If rejecting the todo, please leave a remark."
                 onChange={(e) => setRemark(e.target.value)}
+                value={remark}
                 required
               />
             )

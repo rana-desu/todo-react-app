@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import useTodoStore from './store/todoStore'
 
-import { AddTodo } from './components/Modals'
-import { TodoTable } from './components/TableView'
+import { AddTodo } from './components/modals'
+import { TodoTable } from './components/table_view'
 
 const App = () => {
   useEffect(() => {

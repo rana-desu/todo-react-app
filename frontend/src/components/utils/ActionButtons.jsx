@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react'
 
-import DeleteIcon from '../assets/delete.svg?react'
-import EditIcon from '../assets/edit.svg?react'
-import ViewIcon from '../assets/view.svg?react'
+import DeleteIcon from '@/assets/delete.svg?react'
+import EditIcon from '@/assets/edit.svg?react'
+import ViewIcon from '@/assets/view.svg?react'
 
 const ActionButtons = ({ onView, onEdit, onDelete }) => {
   return (

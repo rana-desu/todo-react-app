@@ -1,8 +1,9 @@
-import TodoStatus from '../TodoStatus'
-import ActionButtons from '../ActionButtons'
-import Categories from '../Categories'
+import TodoStatus from '../utils/TodoStatus'
+import ActionButtons from '../utils/ActionButtons'
+import Categories from '../utils/Categories'
 
 const TodoRow = ({ todo, serial, onView, onEdit, onDelete }) => {
+  console.log(todo)
   return (
     <tr className="hover:bg-zinc-50/10">
       <td className="text-sm text-center">{serial}</td>
