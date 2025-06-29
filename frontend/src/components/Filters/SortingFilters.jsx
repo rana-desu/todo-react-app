@@ -17,7 +17,7 @@ const actionDropdownVariants = {
 }
 
 
-const SortingFilters = ({ onOldest, onLatest }) => {
+const SortingFilters = ({ onOldest, onLatest, onFilterByCategory }) => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -36,7 +36,7 @@ const SortingFilters = ({ onOldest, onLatest }) => {
     }
   }, [])
 
-  const { sortOrder } = useTodoStore()
+  const { sortOrder, categoryFilter } = useTodoStore()
   console.log('sort order changed to:', sortOrder)
 
   return (
@@ -62,10 +62,13 @@ const SortingFilters = ({ onOldest, onLatest }) => {
             className="absolute top-full w-40 shadow-lg"
           >
             <div className="bg-black text-white text-sm rounded-[6px] border border-zinc-50/10 bg-opacity-[0.01] px-1">
+              <span className="px-2 py-1 text-zinc-50/50">
+                sort by date
+              </span>
               <button
                 type="button"
                 onClick={onOldest}
-                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'asc' ? 'bg-white text-black' : ''}`}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'asc' ? 'border-l' : ''}`}
               >
                 Oldest First
               </button>
@@ -73,9 +76,37 @@ const SortingFilters = ({ onOldest, onLatest }) => {
               <button
                 type="button"
                 onClick={onLatest}
-                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'desc' ? 'bg-white text-black' : ''}`}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${sortOrder === 'desc' ? 'border-l' : ''}`}
               >
                 Latest First
+              </button>
+
+              <span className="px-2 py-1 text-zinc-50/50">
+                filter by categories
+              </span>
+
+              <button
+                type="button"
+                onClick={() => onFilterByCategory('work')}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${categoryFilter.includes('work') ? 'border-l' : ''}`}
+              >
+                Work
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onFilterByCategory('personal')}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${categoryFilter.includes('personal') ? 'border-l' : ''}`}
+              >
+                Personal
+              </button>
+
+              <button
+                type="button"
+                onClick={() => onFilterByCategory('chores')}
+                className={`flex flex-row item-center justify-start cursor-pointer transition duration-300 ease-in-out w-full px-4 py-2 my-1 hover:bg-white hover:text-black rounded ${categoryFilter.includes('chores') ? 'border-l' : ''}`}
+              >
+                Chores
               </button>
             </div>
           </motion.div>

@@ -1,5 +1,5 @@
 const buildFilter = (query) => {
-    const { status, searchBy, searchTerm } = query
+    const { status, categories, searchBy, searchTerm } = query
 
     const filter = {}
     if (status) filter.status = status
@@ -7,6 +7,12 @@ const buildFilter = (query) => {
         filter[searchBy] = {
             $regex: searchTerm,
             $options: 'i',
+        }
+    }
+
+    if (categories) {
+        filter.categories = {
+            $in: categories
         }
     }
     

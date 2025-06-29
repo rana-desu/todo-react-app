@@ -4,7 +4,7 @@ import StatusFilters from './StatusFilters'
 import TodoSearch from './TodoSearch'
 
 const FiltersBar = () => {
-  const { sortTodos } = useTodoStore()
+  const { sortTodos, filterByCategory } = useTodoStore()
 
   return (
     <div className="flex items-center justify-between mb-5 filters">
@@ -12,6 +12,7 @@ const FiltersBar = () => {
       <SortingFilters 
         onOldest={() => sortTodos('asc')}
         onLatest={() => sortTodos('desc')}
+        onFilterByCategory={filterByCategory}
         className="border"
       />
 

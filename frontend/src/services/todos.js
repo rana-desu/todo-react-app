@@ -6,6 +6,7 @@ const todosUrl  = '/api/todos'
 const getPage = async (
   searchBy, searchTerm,
   status,
+  categories,
   page = 1, limit = 20,
   order = 'asc'
 ) => {
@@ -18,8 +19,18 @@ const getPage = async (
     params.searchBy = searchBy
     params.searchTerm = searchTerm
   }
+  if (categories) params.categories = categories
 
-  const response = await axios.get(todosUrl, { params })
+  console.log('params in getPage', params)
+
+  const response = await axios.get(
+    todosUrl, {
+      params: params,
+      paramsSerializer: {
+        indexes: null
+      }
+    }
+  )
 
   return response.data
 }

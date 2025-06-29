@@ -11,17 +11,25 @@ const useTodoStore = create((set, get) => ({
     totalPages: 0,
 
     todos: [],
-    categories: [],
 
     statusFilter: 'all',
+    categoryFilter: [],
     sortOrder: 'asc',
     searchBy: 'title',
     searchTerm: '',
 
     fetchTodosPage: async (page) => {
-        const { searchBy, searchTerm, statusFilter, pageSize, sortOrder } = get()
+        const { searchBy, searchTerm, statusFilter, categoryFilter, pageSize, sortOrder } = get()
 
-        const returnedPage = await todoService.getPage(searchBy, searchTerm, statusFilter, page, pageSize, sortOrder)
+        const returnedPage = await todoService.getPage(
+            searchBy, 
+            searchTerm, 
+            statusFilter, 
+            categoryFilter, 
+            page, 
+            pageSize, 
+            sortOrder
+        )
         const { data, ...info } = returnedPage
 
         set(() => ({
@@ -102,6 +110,23 @@ const useTodoStore = create((set, get) => ({
 
         get().fetchTodosPage(get().currentPage)
     },
+
+    filterByCategory: (category) => {
+        set(({categoryFilter}) => {
+            if (!categoryFilter.includes(category)) {
+                return {
+                    categoryFilter: [...categoryFilter, category]
+                }
+            }
+
+            return {
+                categoryFilter: categoryFilter.filter(c => c !== category)
+            }
+        })
+
+        console.log('current category filters:', get().categoryFilter)
+        get().fetchTodosPage(get().currentPage)
+    }
 }))
 
 export default useTodoStore
