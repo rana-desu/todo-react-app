@@ -6,7 +6,9 @@ const useUserStore = create((set, get) => ({
   user: null,
 
   setUser: (newUser) => {
-    todoService.setToken(newUser.token)
+    if (newUser) {
+      todoService.setToken(newUser.token) 
+    }
     set({
       user: newUser
     })
@@ -24,6 +26,11 @@ const useUserStore = create((set, get) => ({
       console.log(exception)
     }
   },
+
+  logoutUser: () => {
+    get().setUser(null)
+    window.localStorage.removeItem('loggeInUser')
+  }
 }))
 
 export default useUserStore

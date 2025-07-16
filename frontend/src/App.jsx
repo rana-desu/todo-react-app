@@ -5,6 +5,7 @@ import useUserStore from './store/userStore'
 import { AddTodo } from './components/modals'
 import { TodoTable } from './components/table_view'
 import LoginForm from './components/LoginForm'
+import LogoutButton from './components/LogoutButton'
 import Togglable from './components/Togglable'
 
 const App = () => {
@@ -38,7 +39,10 @@ const App = () => {
         user === null ? (
           loginForm()
         ) : (
+          <>
+          <LogoutButton />
           <AddTodo />
+          </>
         )
       }
       </section>
