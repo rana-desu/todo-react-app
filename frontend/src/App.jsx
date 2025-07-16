@@ -2,9 +2,10 @@ import { useEffect } from 'react'
 import useTodoStore from './store/todoStore'
 import useUserStore from './store/userStore'
 
-import LoginForm from './components/LoginForm'
 import { AddTodo } from './components/modals'
 import { TodoTable } from './components/table_view'
+import LoginForm from './components/LoginForm'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const { user } = useUserStore()
@@ -13,8 +14,19 @@ const App = () => {
     useTodoStore.getState().fetchTodosPage(1)
   }, [])
 
+  useEffect(() => {
+    const loggedInUser = window.localStorage.getItem('loggedInUser')
+    if (loggedInUser) {
+      useUserStore
+        .getState()
+        .setUser(JSON.parse(loggedInUser))
+    }
+  }, [])
+
   const loginForm = () => (
-    <LoginForm loginUser={useUserStore.getState().loginUser}/>
+    <Togglable buttonLabel="login">
+      <LoginForm loginUser={useUserStore.getState().loginUser}/>
+    </Togglable>
   )
 
   return (

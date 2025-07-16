@@ -1,7 +1,11 @@
 import axios from 'axios'
-
 const todosUrl  = '/api/todos'
 
+let token = null
+
+const setToken = newToken => {
+    token = `Bearer ${newToken}`
+}
 
 const getPage = async (
   searchBy, searchTerm,
@@ -42,8 +46,12 @@ const getAllTodos = async () => (
 
 
 const create = async (todoObject) => {
-    const response = await axios.post(todosUrl, todoObject)
-    return response.data
+  const config = {
+    headers: { Authorization: token }
+  }
+
+  const response = await axios.post(todosUrl, todoObject, config)
+  return response.data
 }
 
 
@@ -57,4 +65,11 @@ const update = (id, todoObject) => (
 )
 
 
-export default { getPage, getAllTodos, create, remove, update }
+export default { 
+  getPage, 
+  getAllTodos, 
+  create, 
+  remove, 
+  update,
+  setToken,
+}

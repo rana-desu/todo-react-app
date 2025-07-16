@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import loginService from '../services/login'
+import todoService from '../services/todos'
 
 const useUserStore = create((set, get) => ({
   user: null,
 
   setUser: (newUser) => {
+    todoService.setToken(newUser.token)
     set({
       user: newUser
     })
@@ -13,10 +15,11 @@ const useUserStore = create((set, get) => ({
   loginUser: async (credentials) => {
     try {
       const user = await loginService.login(credentials)
-      console.log(user)
-      get().setUser(user)
 
-      console.log('user in state', get().user)
+      get().setUser(user)
+      window.localStorage.setItem(
+        'loggedInUser', JSON.stringify(user)
+      )
     } catch (exception) {
       console.log(exception)
     }
