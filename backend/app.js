@@ -27,7 +27,8 @@ app.use(cors())
 app.use(express.static('dist'))
 
 app.use(middleware.requestLogger)
-app.use('/api/todos', todosRouter)
+app.use(middleware.tokenExtractor)
+app.use('/api/todos', middleware.userExtractor, todosRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 

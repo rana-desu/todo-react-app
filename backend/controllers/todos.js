@@ -1,11 +1,8 @@
-const jwt = require('jsonwebtoken')
 const todosRouter = require('express').Router()
 const buildFilter = require('../utils/buildFilter')
 const Todo = require('../models/todo')
-const User = require('../models/user')
 
 todosRouter.get('/', async (request, response, next) => {
-    console.log(request.query)
     const { 
         sort = 'createdAt',
         order = 'asc',
@@ -18,14 +15,16 @@ todosRouter.get('/', async (request, response, next) => {
     const sortOrder = order === 'desc' ? -1 : 1
 
     const todos = await Todo
-        .find(filter)
+        .find({ user: request.user, ...filter})
         .populate('user', { username: 1, name: 1 })
         .sort({ [sort]: sortOrder })
         .skip((page - 1) * limit)
         .limit(parseInt(limit))
         .catch(error => next(error))
 
-    const totalTodos = await Todo.countDocuments(filter)
+    const totalTodos = await Todo.countDocuments(
+        { user: request.user, ...filter }
+    )
 
     response.json({
         data: todos,
@@ -35,22 +34,10 @@ todosRouter.get('/', async (request, response, next) => {
     })
 })
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-  }
-
-  return null
-}
-
 todosRouter.post('/', async (request, response) => {
     const body = request.body
+    const user = request.user
 
-    const decodedToken = jwt.decode(getTokenFrom(request))
-
-    const user = await User.findById(decodedToken.id)
     if (!user) {
         return response.status(400).json({ error: 'userId missing or invalid.' })
     }
@@ -71,6 +58,25 @@ todosRouter.post('/', async (request, response) => {
 })
 
 todosRouter.delete('/:id', async (request, response) => {
+    if (!request.token) {
+        return response
+            .status(400)
+            .json({
+                error: 'The request must contain a valid token.'
+            })
+    }
+
+    const user = request.user
+    const todo = await Todo.findById(request.params.id)
+
+    if (user._id.toString() !== todo.user.toString()) {
+        return response
+            .status(401)
+            .json({
+                error: 'Unauthorized request.'
+            })
+    }
+
     await Todo.findByIdAndDelete(request.params.id)
     response.status(204).end()
 })

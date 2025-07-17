@@ -42,13 +42,13 @@ const App = () => {
           <>
           <LogoutButton />
           <AddTodo />
+          <TodoTable />
           </>
         )
       }
       </section>
 
       <section className="flex flex-col m-auto w-7xl mt-5">
-        <TodoTable />
       </section>
 
       <div className="h-[250px] mt-20"></div>

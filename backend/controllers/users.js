@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
@@ -19,6 +18,28 @@ usersRouter.get('/', async (request, response) => {
 
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
+
+  if (!username || !password) {
+    return response
+      .status(400)
+      .json({
+        error: 'Username or password is missing.'
+      })
+  }
+
+  if (username.length < 3 || username.length > 30) {
+    return response.status(400).json({
+      error: 'Username must be in the range of 3 to 30 characters.'
+    })
+  }
+
+  if (password.length < 3 || password.length > 50) {
+    return response
+      .status(400)
+      .json({
+        error: 'Password must be in the range of 3 to 50 characters'
+      })
+  }
 
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(password, saltRounds)

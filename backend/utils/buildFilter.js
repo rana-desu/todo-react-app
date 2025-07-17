@@ -1,7 +1,7 @@
 const buildFilter = (query) => {
     const { status, categories, searchBy, searchTerm } = query
 
-    const filter = {}
+    const filter = { }
     if (status) filter.status = status
     if (searchBy && searchTerm) {
         filter[searchBy] = {

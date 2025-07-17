@@ -5,9 +5,19 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    minLength: 3,
+    maxLength: 30,
   },
-  name: String,
-  passwordHash: String,
+  name: {
+    type: String,
+    required: true,
+    minLength: 3,
+    maxLength: 30,
+  },
+  passwordHash: {
+    type: String,
+    required: true,
+  },
   todos: [
     {
       type: mongoose.Schema.Types.ObjectId,

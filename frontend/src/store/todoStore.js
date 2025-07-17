@@ -21,7 +21,14 @@ const useTodoStore = create((set, get) => ({
     searchTerm: '',
 
     fetchTodosPage: async (page) => {
-        const { searchBy, searchTerm, statusFilter, categoryFilter, pageSize, sortOrder } = get()
+        const {
+            searchBy, 
+            searchTerm, 
+            statusFilter, 
+            categoryFilter, 
+            pageSize, 
+            sortOrder,
+         } = get()
 
         const returnedPage = await todoService.getPage(
             searchBy, 
@@ -30,7 +37,7 @@ const useTodoStore = create((set, get) => ({
             categoryFilter, 
             page, 
             pageSize, 
-            sortOrder
+            sortOrder,
         )
         
         const { data, ...info } = returnedPage

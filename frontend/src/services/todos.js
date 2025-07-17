@@ -4,7 +4,7 @@ const todosUrl  = '/api/todos'
 let token = null
 
 const setToken = newToken => {
-    token = `Bearer ${newToken}`
+  token = `Bearer ${newToken}`
 }
 
 const getPage = async (
@@ -29,10 +29,11 @@ const getPage = async (
 
   const response = await axios.get(
     todosUrl, {
+      headers: { Authorization: token },
       params: params,
       paramsSerializer: {
         indexes: null
-      }
+      },
     }
   )
 
@@ -56,7 +57,11 @@ const create = async (todoObject) => {
 
 
 const remove = (id) => (
-  axios.delete(`${todosUrl}/${id}`)
+  axios.delete(
+    `${todosUrl}/${id}`, {
+      headers: { Authorization: token }
+    }
+  )
 )
 
 

@@ -7,8 +7,9 @@ const useUserStore = create((set, get) => ({
 
   setUser: (newUser) => {
     if (newUser) {
-      todoService.setToken(newUser.token) 
+      todoService.setToken(newUser.token)
     }
+
     set({
       user: newUser
     })
@@ -29,7 +30,8 @@ const useUserStore = create((set, get) => ({
 
   logoutUser: () => {
     get().setUser(null)
-    window.localStorage.removeItem('loggeInUser')
+    todoService.removeToken()
+    window.localStorage.removeItem('loggedInUser')
   }
 }))
 
