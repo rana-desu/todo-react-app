@@ -30,7 +30,6 @@ const useUserStore = create((set, get) => ({
 
   logoutUser: () => {
     get().setUser(null)
-    todoService.removeToken()
     window.localStorage.removeItem('loggedInUser')
   }
 }))

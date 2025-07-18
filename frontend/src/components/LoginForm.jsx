@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Button from './Button'
 
 const LoginForm = ({ loginUser }) => {
   const [username, setUsername] = useState('')
@@ -39,7 +40,7 @@ const LoginForm = ({ loginUser }) => {
         />
       </div>
 
-      <button type="submit">login</button>
+      <Button type="submit" label="login"/>
     </form>
   )
 }

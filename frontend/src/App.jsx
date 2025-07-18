@@ -5,11 +5,11 @@ import useUserStore from './store/userStore'
 import { AddTodo } from './components/modals'
 import { TodoTable } from './components/table_view'
 import LoginForm from './components/LoginForm'
-import LogoutButton from './components/LogoutButton'
 import Togglable from './components/Togglable'
+import Button from './components/Button'
 
 const App = () => {
-  const { user } = useUserStore()
+  const { user, logoutUser } = useUserStore()
 
   useEffect(() => {
     useTodoStore.getState().fetchTodosPage(1)
@@ -40,7 +40,7 @@ const App = () => {
           loginForm()
         ) : (
           <>
-          <LogoutButton />
+          <Button onClick={logoutUser} label="logout"/>
           <AddTodo />
           <TodoTable />
           </>
