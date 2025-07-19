@@ -93,6 +93,8 @@ const useTodoStore = create((set, get) => ({
             status: newStatus,
             remark: newRemark,
         })
+
+        console.log('returned todo by server upon editing:', returnedTodo)
         set(({ todos }) => {
             console.log('changed todos...', mapUpdatedTodo(todos, id, returnedTodo))
             return { todos: mapUpdatedTodo(todos, id, returnedTodo) }

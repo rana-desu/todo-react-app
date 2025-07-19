@@ -11,7 +11,7 @@ const EditTodo = ({ todo, onEdit, onCancel }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('sending request to axios..')
+    console.log('sending request to axios..', todo.id)
     await onEdit(todo.id, title, description, status, remark)
     
     onCancel()

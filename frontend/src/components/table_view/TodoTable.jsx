@@ -42,16 +42,19 @@ const TodoTable = () => {
 
       <tbody className="divide-y divide-x divide-zinc-50/10">
         {
-          todos.map((todo, index) => (
-            <TodoRow
-              key={todo.id}
-              todo={todo}
-              serial={((currentPage - 1) * pageSize) + currentSerials[index]}
-              onEdit={() => setEditingTodo(todo)}
-              onView={() => setViewingTodo(todo)}
-              onDelete={() => deleteTodo(todo.id)}
-            />
-          ))
+          todos.map((todo, index) => {
+            console.log('todo id in table component:', todo.id)
+            return (
+              <TodoRow
+                key={todo.id}
+                todo={todo}
+                serial={((currentPage - 1) * pageSize) + currentSerials[index]}
+                onEdit={() => setEditingTodo(todo)}
+                onView={() => setViewingTodo(todo)}
+                onDelete={() => deleteTodo(todo.id)}
+              />
+            )
+          })
         }
       </tbody>
     </table>
