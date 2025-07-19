@@ -63,11 +63,13 @@ const remove = (id) => (
 )
 
 
-const update = async (id, todoObject) => (
-  await axios.patch(`${todosUrl}/${id}`, todoObject, {
+const update = async (id, todoObject) => {
+  const response = await axios.patch(`${todosUrl}/${id}`, todoObject, {
     headers: { Authorization: token }
   })
-)
+
+  return response.data
+}
 
 
 export default { 

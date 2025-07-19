@@ -93,7 +93,6 @@ const useTodoStore = create((set, get) => ({
             status: newStatus,
             remark: newRemark,
         })
-
         set(({ todos }) => {
             return { todos: mapUpdatedTodo(todos, id, returnedTodo) }
         })

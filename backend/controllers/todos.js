@@ -39,7 +39,7 @@ todosRouter.post('/', async (request, response) => {
     const user = request.user
 
     if (!user) {
-        return response.status(400).json({ error: 'userId missing or invalid.' })
+        return response.status(400).json({ error: 'token missing or invalid.' })
     }
 
     const todo = new Todo({
@@ -83,11 +83,27 @@ todosRouter.delete('/:id', async (request, response) => {
 
 todosRouter.patch('/:id', async (request, response) => {
     const { title, description, remark, status } = request.body
+    const user = request.user
+
+    if (!user) {
+        response.status(400).json({
+            error: 'token missing or invalid.'
+        })
+    }
 
     const todo = await Todo.findById(request.params.id)
 
+    
     if (!todo) {
         return response.status(404).end()
+    }
+    
+    if (user._id.toString() !== todo.user.toString()) {
+        return response
+            .status(401)
+            .json({
+                error: 'Unauthorized request.'
+            })
     }
 
     todo.title = title
@@ -95,7 +111,7 @@ todosRouter.patch('/:id', async (request, response) => {
     todo.remark = remark
     todo.status = status
 
-    const savedTodo = todo.save()
+    const savedTodo = await todo.save()
     response.json(savedTodo)
 })
 
