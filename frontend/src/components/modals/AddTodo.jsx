@@ -38,6 +38,12 @@ const AddTodo = () => {
 
   return (
     <>
+    <Button 
+      type="button"
+      label="add todo"
+      onClick={() => addFormRef.current.toggleOpened()}
+    />
+
     <Modal
       layoutId="add-todo-form"
       buttonLabel="add todo"
@@ -81,7 +87,7 @@ const AddTodo = () => {
           />
           
           <div className="flex gap-4">   
-            <Button type="button" onClick={() => addFormRef.current.toggleOpened()}>
+            <Button type="button" onClick={() => addFormRef.current.toggleOpened()} variant="cancel">
               <p>cancel</p>
             </Button>
 

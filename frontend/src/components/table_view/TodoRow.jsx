@@ -2,8 +2,7 @@ import TodoStatus from '../utils/TodoStatus'
 import ActionButtons from '../utils/ActionButtons'
 import Categories from '../utils/Categories'
 
-const TodoRow = ({ todo, serial, onView, onEdit, onDelete }) => {
-  console.log(todo)
+const TodoRow = ({ todo, serial, onDelete }) => {
   return (
     <tr className="hover:bg-zinc-50/10">
       <td className="text-sm text-center">{serial}</td>
@@ -15,10 +14,9 @@ const TodoRow = ({ todo, serial, onView, onEdit, onDelete }) => {
       </td>
       <td className="text-sm text-center"><Categories categories={todo.categories}/></td>
       <td className="text-sm text-center">
-        <ActionButtons 
-          onDelete={onDelete} 
-          onView={onView} 
-          onEdit={onEdit}
+        <ActionButtons
+          todo={todo} 
+          onDelete={onDelete}
         />
       </td>
     </tr>

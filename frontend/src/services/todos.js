@@ -25,8 +25,6 @@ const getPage = async (
   }
   if (categories) params.categories = categories
 
-  console.log('params in getPage', params)
-
   const response = await axios.get(
     todosUrl, {
       headers: { Authorization: token },
@@ -65,8 +63,10 @@ const remove = (id) => (
 )
 
 
-const update = (id, todoObject) => (
-  axios.patch(`${todosUrl}/${id}`, todoObject).then(response => response.data)
+const update = async (id, todoObject) => (
+  await axios.patch(`${todosUrl}/${id}`, todoObject, {
+    headers: { Authorization: token }
+  })
 )
 
 

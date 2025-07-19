@@ -37,7 +37,6 @@ const SortingFilters = ({ onOldest, onLatest, onFilterByCategory }) => {
   }, [])
 
   const { sortOrder, categoryFilter } = useTodoStore()
-  console.log('sort order changed to:', sortOrder)
 
   return (
     <div ref={dropdownRef} className="flex flex-row justify-center items-center mr-3 my-2 relative">

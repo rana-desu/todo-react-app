@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'motion/react'
 
+import EditTodo from '../modals/EditTodo'
+
 import DeleteIcon from '@/assets/delete.svg?react'
-import EditIcon from '@/assets/edit.svg?react'
 import ViewIcon from '@/assets/view.svg?react'
 
-const ActionButtons = ({ onView, onEdit, onDelete }) => {
+const ActionButtons = ({ todo, onView, onEdit, onDelete }) => {
   return (
     <div className="flex items-center justify-center">
       <motion.button
@@ -22,19 +23,11 @@ const ActionButtons = ({ onView, onEdit, onDelete }) => {
         />
       </motion.button>
 
-      <motion.button
-        whileHover={{
-          scale: 1.2,
-          transition: { duration: 1 },
-        }}
-        whileTap={{ scale: 0.9 }}
-        onClick={onEdit}
+      <EditTodo
+        todo={todo}
+        onEdit={onEdit}
         className="mx-2"
-      >
-        <EditIcon 
-          className="fill-zinc-50/60 hover:fill-zinc-50/80"
-        />
-      </motion.button>
+      />
 
       <motion.button
         whileHover={{

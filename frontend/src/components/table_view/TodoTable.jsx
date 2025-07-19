@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
-import { AnimatePresence } from 'motion/react'
-import { EditTodo, ViewTodo } from '../modals'
+import { useEffect } from 'react'
 import { FiltersBar } from '../filters'
 import useTodoStore from '@/store/todoStore'
 import TodoRow from './TodoRow'
@@ -10,16 +8,12 @@ const TodoTable = () => {
   const { 
     todos,
     currentSerials,
-    editTodo, 
     deleteTodo,
     pageSize, 
     currentPage, 
     fetchTodosPage,
    } = useTodoStore()
 
-  const [editingTodo, setEditingTodo] = useState(null)
-  const [viewingTodo, setViewingTodo] = useState(null)
-  
   useEffect(() => {
     fetchTodosPage(currentPage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,8 +41,6 @@ const TodoTable = () => {
               key={todo.id}
               todo={todo}
               serial={((currentPage - 1) * pageSize) + currentSerials[index]}
-              onEdit={() => setEditingTodo(todo)}
-              onView={() => setViewingTodo(todo)}
               onDelete={() => deleteTodo(todo.id)}
             />
           ))
@@ -56,25 +48,6 @@ const TodoTable = () => {
       </tbody>
     </table>
 
-    <AnimatePresence>
-    {viewingTodo && (
-      <ViewTodo
-        todo={viewingTodo}
-        onClose={() => setViewingTodo(null)}
-      />
-    )}      
-    </AnimatePresence>
-
-    <AnimatePresence>
-    {editingTodo && (
-      <EditTodo
-        todo={editingTodo}
-        onEdit={editTodo}
-        onCancel={() => setEditingTodo(null)}
-      />
-    )}      
-    </AnimatePresence>
-    
     <PaginateRow />
     </>
   ) 
