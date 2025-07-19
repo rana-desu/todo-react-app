@@ -93,12 +93,11 @@ const useTodoStore = create((set, get) => ({
             status: newStatus,
             remark: newRemark,
         })
-
-        console.log('returned todo by server upon editing:', returnedTodo)
         set(({ todos }) => {
-            console.log('changed todos...', mapUpdatedTodo(todos, id, returnedTodo))
             return { todos: mapUpdatedTodo(todos, id, returnedTodo) }
         })
+
+        get().fetchTodosPage(get().currentPage)
     },
 
     updateStatus: async (id, newStatus) => {
@@ -154,9 +153,7 @@ const useTodoStore = create((set, get) => ({
             for (let i = 0; i < get().totalTodos; i++) {
                 newSerials[i] = i + 1
             }
-
-            console.log('new serials for current pages:', newSerials)
-
+            
             return (
                 { currentSerials: newSerials }
             )

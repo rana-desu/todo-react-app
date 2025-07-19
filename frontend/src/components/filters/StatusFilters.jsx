@@ -15,8 +15,6 @@ const StatusFilters = () => {
   const { statusFilter, setFilter } = useTodoStore()
   const filterSelected = (status) => setFilter(status)
 
-  console.log("current filter", statusFilter)
-
   return (
     <div className="flex items-center justify-end">
       {

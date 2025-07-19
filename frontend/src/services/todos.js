@@ -25,8 +25,6 @@ const getPage = async (
   }
   if (categories) params.categories = categories
 
-  console.log('params in getPage', params)
-
   const response = await axios.get(
     todosUrl, {
       headers: { Authorization: token },

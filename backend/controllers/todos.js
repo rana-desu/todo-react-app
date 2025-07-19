@@ -1,5 +1,6 @@
 const todosRouter = require('express').Router()
 const buildFilter = require('../utils/buildFilter')
+const logger = require('../utils/logger')
 const Todo = require('../models/todo')
 
 todosRouter.get('/', async (request, response, next) => {
