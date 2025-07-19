@@ -5,11 +5,12 @@ import useUserStore from './store/userStore'
 import { AddTodo } from './components/modals'
 import { TodoTable } from './components/table_view'
 import LoginForm from './components/LoginForm'
+import SignupForm from './components/SignupForm'
 import Togglable from './components/Togglable'
 import Button from './components/Button'
 
 const App = () => {
-  const { user, logoutUser } = useUserStore()
+  const { user, signupUser, loginUser, logoutUser } = useUserStore()
 
   useEffect(() => {
     useTodoStore.getState().fetchTodosPage(1)
@@ -26,7 +27,13 @@ const App = () => {
 
   const loginForm = () => (
     <Togglable buttonLabel="login">
-      <LoginForm loginUser={useUserStore.getState().loginUser}/>
+      <LoginForm loginUser={loginUser}/>
+    </Togglable>
+  )
+
+  const signupForm = () => (
+    <Togglable buttonLabel="signup">
+      <SignupForm signupUser={signupUser}/>
     </Togglable>
   )
 
@@ -37,10 +44,13 @@ const App = () => {
       <section className="flex flex-col m-auto w-7xl mt-5">
       {
         user === null ? (
-          loginForm()
+          <>
+          {signupForm()}
+          {loginForm()}
+          </>
         ) : (
           <>
-          <Button onClick={logoutUser} label="logout"/>
+          <Button onClick={logoutUser} label="logout" variant="cancel"/>
           <AddTodo />
           <TodoTable />
           </>

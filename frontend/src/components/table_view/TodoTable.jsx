@@ -43,8 +43,6 @@ const TodoTable = () => {
                 key={todo.id}
                 todo={todo}
                 serial={((currentPage - 1) * pageSize) + currentSerials[index]}
-                onEdit={() => setEditingTodo(todo)}
-                onView={() => setViewingTodo(todo)}
                 onDelete={() => deleteTodo(todo.id)}
               />
             )
