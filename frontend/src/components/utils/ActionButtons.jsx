@@ -2,46 +2,23 @@
 import { motion } from 'motion/react'
 
 import EditTodo from '../modals/EditTodo'
+import ViewTodo from '../modals/ViewTodo'
 
 import DeleteIcon from '@/assets/delete.svg?react'
-import ViewIcon from '@/assets/view.svg?react'
 
-const ActionButtons = ({ todo, onView, onEdit, onDelete }) => {
+
+const ActionButtons = ({ todo, onDelete }) => {
   return (
-    <div className="flex items-center justify-center">
-      <motion.button
-        whileHover={{
-          scale: 1.2,
-          transition: { duration: 1 },
-        }}
-        whileTap={{ scale: 0.9 }}
-        onClick={onView}
-        className="mx-2"
-      >
-        <ViewIcon 
-          className="fill-zinc-50/60 hover:fill-zinc-50/80"
-        />
-      </motion.button>
+    <div className="flex items-center justify-center gap-4">
+      <ViewTodo todo={todo}/>
 
-      <EditTodo
-        todo={todo}
-        onEdit={onEdit}
-        className="mx-2"
-      />
+      <EditTodo todo={todo}/>
 
-      <motion.button
-        whileHover={{
-          scale: 1.2,
-          transition: { duration: 1 },
-        }}
-        whileTap={{ scale: 0.9 }}
-        onClick={onDelete}
-        className="mx-2"
-      >
+      <button onClick={onDelete}>
         <DeleteIcon 
           className="fill-zinc-50/60 hover:fill-zinc-50/80"
         />
-      </motion.button>
+      </button>
 
     </div>
   )

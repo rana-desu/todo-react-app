@@ -25,7 +25,7 @@ const EditTodo = ({ todo }) => {
   return (
     <>
     <button onClick={toggleEditModal}>
-      <EditIcon />
+      <EditIcon className="fill-zinc-50/60 hover:fill-zinc-50/80"/>
     </button>
 
     <Modal layoutId={`todo-${todo.id}`} buttonLabel="edit" ref={editFormRef}>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import useTodoStore from './store/todoStore'
 import useUserStore from './store/userStore'
 
@@ -12,6 +12,8 @@ import Button from './components/Button'
 
 const App = () => {
   const { user, signupUser, loginUser, logoutUser } = useUserStore()
+  const loginFormRef = useRef()
+  const signupFormRef = useRef()
 
   useEffect(() => {
     useTodoStore.getState().fetchTodosPage(1)
@@ -27,13 +29,19 @@ const App = () => {
   }, [])
 
   const loginForm = () => (
-    <Togglable buttonLabel="login">
+    <Togglable 
+      buttonLabel="login" 
+      ref={loginFormRef} 
+    >
       <LoginForm loginUser={loginUser}/>
     </Togglable>
   )
 
   const signupForm = () => (
-    <Togglable buttonLabel="signup">
+    <Togglable 
+      buttonLabel="signup" 
+      ref={signupFormRef} 
+    >
       <SignupForm signupUser={signupUser}/>
     </Togglable>
   )

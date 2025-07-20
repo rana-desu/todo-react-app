@@ -2,7 +2,7 @@ import { useState, forwardRef, useImperativeHandle } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'motion/react'
 
-const Modal = forwardRef(({ children, layoutId}, refs) => {
+const Modal = forwardRef(({ children, layoutId }, refs) => {
   const [isOpened, setIsOpened] = useState(false)
 
   const toggleOpened = () => {

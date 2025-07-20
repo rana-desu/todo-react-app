@@ -25,7 +25,7 @@ const SignupForm = ({ signupUser }) => {
 
   return (
     <form onSubmit={handleSignup}>
-      <h2>Signup</h2>
+      <h2 className="text-2xl py-4 font-bold">Signup</h2>
       <div>
         Username:
         <input 
@@ -33,6 +33,7 @@ const SignupForm = ({ signupUser }) => {
           type="text"
           onChange={({ target }) => setUsername(target.value)}
           name="Username"
+          className="p-5 my-2 min-w-2xl border-1 border-zinc-50/10 bg-opacity-[0.01] outline-none rounded-sm w-full"
         />
       </div>
       <div>
@@ -42,6 +43,7 @@ const SignupForm = ({ signupUser }) => {
           type="text"
           onChange={({ target }) => setName(target.value)}
           name="Name"
+          className="p-5 my-2 min-w-2xl border-1 border-zinc-50/10 bg-opacity-[0.01] outline-none rounded-sm w-full"
         />
       </div>
       <div>
@@ -51,6 +53,7 @@ const SignupForm = ({ signupUser }) => {
           type="password"
           onChange={({ target }) => setPassword(target.value)}
           name="Password"
+          className="p-5 my-2 min-w-2xl border-1 border-zinc-50/10 bg-opacity-[0.01] outline-none rounded-sm w-full"
         />
       </div>
 

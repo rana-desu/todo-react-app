@@ -20,7 +20,7 @@ const LoginForm = ({ loginUser }) => {
 
   return (
     <form onSubmit={handleLogin}>
-      <h2>Login</h2>
+      <h2 className="text-2xl py-4 font-bold">Login</h2>
       <div>
         Username: 
         <input 
@@ -28,6 +28,7 @@ const LoginForm = ({ loginUser }) => {
           value={username}
           onChange={({ target }) => setUsername(target.value)}
           name="Username"
+          className="p-5 my-2 min-w-2xl border-1 border-zinc-50/10 bg-opacity-[0.01] outline-none rounded-sm w-full"
         />
       </div>
       <div>
@@ -37,6 +38,7 @@ const LoginForm = ({ loginUser }) => {
           value={password}
           onChange={({ target }) => setPassword(target.value)}
           name="Password"
+          className="p-5 my-2 min-w-2xl border-1 border-zinc-50/10 bg-opacity-[0.01] outline-none rounded-sm w-full"
         />
       </div>
 
