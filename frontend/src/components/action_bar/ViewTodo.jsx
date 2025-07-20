@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import TodoContent from '../utils/TodoContent'
 import TodoStatus from '../utils/TodoStatus'
 import Categories from '../utils/Categories'
-import Modal from './Modal'
+import Modal from '../modals/Modal'
 import ViewIcon from '@/assets/view.svg?react'
 import CloseIcon from '@/assets/delete.svg?react'
 

@@ -1,5 +1,5 @@
 import TodoStatus from '../utils/TodoStatus'
-import ActionButtons from '../utils/ActionButtons'
+import ActionButtons from '../action_bar/ActionButtons'
 import Categories from '../utils/Categories'
 
 const TodoRow = ({ todo, serial, onDelete }) => {

@@ -1,6 +1,5 @@
 const todosRouter = require('express').Router()
 const buildFilter = require('../utils/buildFilter')
-const logger = require('../utils/logger')
 const Todo = require('../models/todo')
 
 todosRouter.get('/', async (request, response, next) => {
@@ -15,17 +14,21 @@ todosRouter.get('/', async (request, response, next) => {
     const filter = buildFilter(query)
     const sortOrder = order === 'desc' ? -1 : 1
 
+    const user = request.user 
+    const roleAccessFilter = user.role === 'admin' ? {} : { user } 
+
     const todos = await Todo
-        .find({ user: request.user, ...filter})
+        .find({ ...roleAccessFilter, ...filter})
         .populate('user', { username: 1, name: 1 })
         .sort({ [sort]: sortOrder })
         .skip((page - 1) * limit)
         .limit(parseInt(limit))
         .catch(error => next(error))
 
-    const totalTodos = await Todo.countDocuments(
-        { user: request.user, ...filter }
-    )
+    const totalTodos = await Todo.countDocuments({ 
+        ...roleAccessFilter, 
+        ...filter 
+    })
 
     response.json({
         data: todos,
@@ -70,7 +73,7 @@ todosRouter.delete('/:id', async (request, response) => {
     const user = request.user
     const todo = await Todo.findById(request.params.id)
 
-    if (user._id.toString() !== todo.user.toString()) {
+    if (user.role === 'user' && user._id.toString() !== todo.user.toString()) {
         return response
             .status(401)
             .json({
@@ -99,7 +102,7 @@ todosRouter.patch('/:id', async (request, response) => {
         return response.status(404).end()
     }
     
-    if (user._id.toString() !== todo.user.toString()) {
+    if (user.role === 'user' && user._id.toString() !== todo.user.toString()) {
         return response
             .status(401)
             .json({

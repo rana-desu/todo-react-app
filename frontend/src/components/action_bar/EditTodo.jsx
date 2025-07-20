@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import useTodoStore from '@/store/todoStore'
-import Modal from './Modal'
+import Modal from '../modals/Modal'
 import Button from '../Button'
 import EditIcon from '@/assets/edit.svg?react'
 
@@ -72,7 +72,7 @@ const EditTodo = ({ todo }) => {
           )
         }
 
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-8">
           <Button
             type="button"
             onClick={toggleEditModal}
