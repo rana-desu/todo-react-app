@@ -6,6 +6,7 @@ import { AddTodo } from './components/modals'
 import { TodoTable } from './components/table_view'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
+import ResultStats from './components/ResultStats'
 import Togglable from './components/Togglable'
 import Button from './components/Button'
 
@@ -44,14 +45,17 @@ const App = () => {
       <section className="flex flex-col m-auto w-7xl mt-5">
       {
         user === null ? (
-          <>
-          {signupForm()}
-          {loginForm()}
-          </>
+          <div className="flex align-center justify-center gap-8">
+            {signupForm()}
+            {loginForm()}
+          </div>
         ) : (
           <>
-          <Button onClick={logoutUser} label="logout" variant="cancel"/>
-          <AddTodo />
+          <div className="flex align-center justify-end gap-8">
+            <Button onClick={logoutUser} label="logout" variant="cancel"/>
+            <AddTodo />
+          </div>
+          <ResultStats />
           <TodoTable />
           </>
         )
