@@ -49,23 +49,24 @@ const useTodoStore = create((set, get) => ({
                 statusFilter, 
                 categoryFilter, 
                 page, 
-                pageSize, 
+                pageSize,
                 sortOrder,
             )
 
-            const { data, ...info } = returnedPage
+            const { data, totalTodos } = returnedPage
+            const totalPages = Math.ceil(totalTodos / pageSize)
 
             cachedPages[page] = {
                 data, 
-                totalTodos: info.totalTodos, 
-                totalPages: Math.ceil(info.totalTodos / pageSize)
+                totalTodos, 
+                totalPages
             }
             console.log('requested page was cached in memory: ', cachedPages)
 
             set(() => ({
                 todos: data,
-                totalPages: info.totalPages,
-                totalTodos: info.totalTodos,
+                totalPages,
+                totalTodos,
                 currentPage: page,
             }))
         }

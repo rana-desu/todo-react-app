@@ -34,7 +34,6 @@ todosRouter.get('/', async (request, response, next) => {
         data: todos,
         totalTodos,
         page: parseInt(page),
-        totalPages: Math.ceil(totalTodos / parseInt(limit))
     })
 })
 
