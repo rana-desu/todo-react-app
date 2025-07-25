@@ -36,6 +36,7 @@ const ViewTodo = ({ todo }) => {
           title={todo.title} 
           description={todo.description}
           remark={todo.remark}
+          createdBy={todo.user.name}
           creationDate={todo.createdAt}
         />
       </div>

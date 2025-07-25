@@ -11,6 +11,8 @@ const useTodoStore = create((set, get) => ({
     totalPages: 0,
     totalTodos: 0,
 
+    cachedPages: [], // [page_num: {[data], totalPages, totalTodos}, ...]
+
     todos: [],
     currentSerials: [],
 
@@ -28,33 +30,51 @@ const useTodoStore = create((set, get) => ({
             categoryFilter, 
             pageSize, 
             sortOrder,
-         } = get()
+            cachedPages,
+        } = get()
 
-        const returnedPage = await todoService.getPage(
-            searchBy, 
-            searchTerm, 
-            statusFilter, 
-            categoryFilter, 
-            page, 
-            pageSize, 
-            sortOrder,
-        )
-        
-        const { data, ...info } = returnedPage
-        set(() => ({
-            todos: data,
-            totalPages: info.totalPages,
-            totalTodos: info.totalTodos,
-            currentPage: page
-        }))
+        console.log('length of cachedPages: ', cachedPages?.length)
+        if (page in cachedPages) {
+            console.log('requested page already exists in cache...', cachedPages)
+            set(() => ({
+                todos: cachedPages[page].data,
+                totalTodos: cachedPages[page].totalTodos,
+                totalPages: cachedPages[page].totalPages,
+                currentPage: page,
+            }))
+        } else {
+            const returnedPage = await todoService.getPage(
+                searchBy, 
+                searchTerm, 
+                statusFilter, 
+                categoryFilter, 
+                page, 
+                pageSize, 
+                sortOrder,
+            )
+
+            const { data, ...info } = returnedPage
+
+            cachedPages[page] = {
+                data, 
+                totalTodos: info.totalTodos, 
+                totalPages: Math.ceil(info.totalTodos / pageSize)
+            }
+            console.log('requested page was cached in memory: ', cachedPages)
+
+            set(() => ({
+                todos: data,
+                totalPages: info.totalPages,
+                totalTodos: info.totalTodos,
+                currentPage: page,
+            }))
+        }
 
         let newSerials = []
         for (let i = 0; i < get().totalTodos; i++) {
             newSerials[i] = i + 1
         }
-        set(() => ({
-            currentSerials: newSerials
-        }))
+        set(() => ({ currentSerials: newSerials }))
     },
 
     addTodo: async (title, description, categories) => {

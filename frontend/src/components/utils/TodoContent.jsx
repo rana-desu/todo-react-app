@@ -1,4 +1,13 @@
-const TodoContent = ({ status, title, description, remark, creationDate }) => {
+const TodoContent = ({ status, title, description, remark, createdBy, creationDate }) => {
+  const date = new Date(creationDate)
+    .toLocaleString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+
   return (
     <div className="flex flex-col justify-start todos-content w-full">
       <p className="inline-flex justify-start todos-content whitespace-normal break-words p-4">{title}</p>
@@ -15,15 +24,8 @@ const TodoContent = ({ status, title, description, remark, creationDate }) => {
       )}
 
       <p className="inline-flex justify-end p-4 text-sm">
-        at{" "}
-        {new Date(creationDate).toLocaleString("en-IN", {
-            year: "numeric",
-            month: "short",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-        }
+        {`created by ${createdBy}`}
+        {`, at ${date}`}
       </p>
     </div>
   )
