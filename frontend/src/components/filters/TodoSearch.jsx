@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'motion/react'
 import { useTodoStore } from '@/store'
+import { useDebounce } from '@uidotdev/usehooks'
 
 
 const actionDropdownVariants = {
@@ -20,7 +21,8 @@ const TodoSearch = () => {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
-  const { searchTerm, searchTodos } = useTodoStore()
+  const { searchTerm, setSearchTerm } = useTodoStore()
+  const debuoncedSearchTerm = useDebounce(searchTerm, 800)
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -36,8 +38,16 @@ const TodoSearch = () => {
   }, [])
   
   const handleChange = (e) => {
-    searchTodos(searchBy, e.target.value)
+    setSearchTerm(e.target.value)
   }
+
+  useEffect(() => {
+    if (debuoncedSearchTerm != '') {
+      useTodoStore.getState().searchTodos(searchBy, debuoncedSearchTerm)
+    } else if (debuoncedSearchTerm === '') {
+      useTodoStore.getState().refetchPage()
+    }
+  }, [searchBy, debuoncedSearchTerm])
 
   return (
     <div className="flex items-center">

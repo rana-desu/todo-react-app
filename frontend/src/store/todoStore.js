@@ -131,7 +131,7 @@ const useTodoStore = create((set, get) => ({
         }))
     },
 
-    setFilter: async (status) => {
+    setFilter: (status) => {
         set({ statusFilter: status })
         get().refetchPage(1)
     },
@@ -140,6 +140,8 @@ const useTodoStore = create((set, get) => ({
         set({ sortOrder: sortOrder })
         get().refetchPage(1)
     },
+
+    setSearchTerm: (searchTerm) => { set({ searchTerm }) },
 
     searchTodos: (searchBy, searchTerm) => {
         set({
