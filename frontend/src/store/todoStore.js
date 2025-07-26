@@ -78,47 +78,48 @@ const useTodoStore = create((set, get) => ({
         set(() => ({ currentSerials: newSerials }))
     },
 
+    refetchPage: (page = get().currentPage) => {
+        const { cachedPages, fetchTodosPage } = get()
+
+        delete cachedPages[page]
+        fetchTodosPage(page)
+    },
+
     addTodo: async (title, description, categories) => {
-        try {
-            const newTodo = {
-                title,
-                description,
-                status: 'pending',
-                categories,
-                remark: '',
-                overdue: 'false',
-                createdAt: new Date(),
-            }
-            
-            await todoService.create(newTodo)
-            await get().fetchTodosPage(get().currentPage)
-        } catch (error) {
-            console.error(`Couldn't add todo:`, error)
+        const newTodo = {
+            title,
+            description,
+            status: 'pending',
+            categories,
+            remark: '',
+            overdue: 'false',
+            createdAt: new Date(),
         }
+        
+        await todoService.create(newTodo)
+        get().refetchPage()
     },
 
     deleteTodo: async (id) => {
         try {
             await todoService.remove(id)
-            const { currentPage } = get()
-            await get().fetchTodosPage(currentPage)
+            get().refetchPage()
         } catch (error) {
             console.error(`Couldn't delete todo:`, error)
         }
     },
 
-    editTodo: async (id, newTitle, newDescription, newStatus, newRemark) => {
+    editTodo: async (id, title, description, status, categories, remark) => {
         const returnedTodo = await todoService.update(id, {
-            title: newTitle,
-            description: newDescription,
-            status: newStatus,
-            remark: newRemark,
-        })
-        set(({ todos }) => {
-            return { todos: mapUpdatedTodo(todos, id, returnedTodo) }
+            title,
+            description,
+            status,
+            categories,
+            remark,
         })
 
-        get().fetchTodosPage(get().currentPage)
+        set(({ todos }) => ({ todos: mapUpdatedTodo(todos, id, returnedTodo) }))
+        get().refetchPage()
     },
 
     updateStatus: async (id, newStatus) => {
@@ -132,14 +133,12 @@ const useTodoStore = create((set, get) => ({
 
     setFilter: async (status) => {
         set({ statusFilter: status })
-
-        get().fetchTodosPage(1)
+        get().refetchPage(1)
     },
 
     sortTodos: async (sortOrder) => {
         set({ sortOrder: sortOrder })
-
-        get().fetchTodosPage(1)
+        get().refetchPage(1)
     },
 
     searchTodos: (searchBy, searchTerm) => {
@@ -147,8 +146,7 @@ const useTodoStore = create((set, get) => ({
             searchBy: searchBy,
             searchTerm: searchTerm
         })
-
-        get().fetchTodosPage(get().currentPage)
+        get().refetchPage()
     },
 
     filterByCategory: (category) => {
@@ -163,8 +161,7 @@ const useTodoStore = create((set, get) => ({
                 categoryFilter: categoryFilter.filter(c => c !== category)
             }
         })
-
-        get().fetchTodosPage(get().currentPage)
+        get().refetchPage()
     },
 
     serialize: () => {

@@ -82,8 +82,8 @@ const AddTodo = () => {
 
         <div className="flex flex-row items-center justify-between min-w-2xl gap-4">
           <CategoriesDropdown 
-            selectedCategories={categories}
-            setSelectedCategories={setCategories}
+            categories={categories}
+            setCategories={setCategories}
           />
           
           <div className="flex gap-4">   

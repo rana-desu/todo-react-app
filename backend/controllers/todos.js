@@ -85,7 +85,7 @@ todosRouter.delete('/:id', async (request, response) => {
 })
 
 todosRouter.patch('/:id', async (request, response) => {
-    const { title, description, remark, status } = request.body
+    const { title, description, remark, status, categories } = request.body
     const user = request.user
 
     if (!user) {
@@ -113,6 +113,7 @@ todosRouter.patch('/:id', async (request, response) => {
     todo.description = description
     todo.remark = remark
     todo.status = status
+    todo.categories = categories
 
     const savedTodo = await todo.save()
     response.json(savedTodo)

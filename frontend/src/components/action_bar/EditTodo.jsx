@@ -3,6 +3,7 @@ import useTodoStore from '@/store/todoStore'
 import Modal from '../modals/Modal'
 import Button from '../Button'
 import EditIcon from '@/assets/edit.svg?react'
+import CategoriesDropdown from '../utils/CategoriesDropdown'
 
 const EditTodo = ({ todo }) => {
   const { editTodo } = useTodoStore()
@@ -11,13 +12,14 @@ const EditTodo = ({ todo }) => {
   const [description, setDescription] = useState(todo.description)
   const [remark, setRemark] = useState(todo.remark)
   const [status, setStatus] = useState(todo.status)
+  const [categories, setCategories] = useState(todo.categories)
   const editFormRef = useRef()
 
   const toggleEditModal = () => editFormRef.current.toggleOpened()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await editTodo(todo.id, title, description, status, remark)
+    await editTodo(todo.id, title, description, status, categories, remark)
     
     toggleEditModal()
   }
@@ -33,18 +35,6 @@ const EditTodo = ({ todo }) => {
         onSubmit={handleSubmit}
       >
         <h2 className="text-3xl font-bold mb-4">Edit Todo</h2>
-
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="w-full p-2 border-1 border-zinc-50/10 bg-opacity-[0.01] mb-4"
-        >
-          <option value="pending">Pending</option>
-          <option value="in-progress">In Progress</option>
-          <option value="completed">Completed</option>
-          <option value="rejected">Rejected</option>
-          <option value="on-hold">On Hold</option>          
-        </select>
 
         <input
           type="text"
@@ -71,6 +61,25 @@ const EditTodo = ({ todo }) => {
             />
           )
         }
+
+        <div className="mt-4 flex justify-start items-center gap-4">
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="p-4 border border-zinc-50/10 bg-opacity-[0.01] hover:border-zinc-50/20 mb-4 cursor-pointer w-1/2"
+          >
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="rejected">Rejected</option>
+            <option value="on-hold">On Hold</option>          
+          </select>
+
+          <CategoriesDropdown 
+            categories={categories}
+            setCategories={setCategories}
+          />
+        </div>
 
         <div className="flex justify-end gap-8">
           <Button
