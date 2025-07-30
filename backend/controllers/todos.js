@@ -88,7 +88,7 @@ todosRouter.patch('/:id', isAuthenticated, isOwner, async (request, response) =>
     response.json(savedTodo)
 })
 
-todosRouter.get('/stats', isAuthenticated, isOwner, async (request, response) => {
+todosRouter.get('/stats', isAuthenticated, async (request, response) => {
     const user = request.user
     let stats = null
     
