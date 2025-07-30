@@ -41,6 +41,7 @@ const todoSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        index: true,
     },
 })
 
@@ -52,5 +53,8 @@ todoSchema.set('toJSON', {
         delete returnedObject.__v
     }
 })
+
+todoSchema.index({ createdAt: -1 })
+todoSchema.index({ status: 1, category: 1, createdAt: -1 })
 
 module.exports = mongoose.model('Todo', todoSchema)
