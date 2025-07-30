@@ -60,7 +60,7 @@ const App = () => {
           </div>
         ) : (
           <>
-          <div className="flex align-center justify-between gap-8">
+          <div className="flex align-center justify-between gap-8 my-10">
             <TodoStats />
             <div>
             <Button onClick={logoutUser} label="logout" variant="cancel"/>

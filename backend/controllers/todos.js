@@ -1,9 +1,11 @@
 const todosRouter = require('express').Router()
 const buildFilter = require('../utils/buildFilter')
+const isAuthenticated = require('../policies/isAuthenticated')
+const isOwner = require('../policies/isOwner')
 const todoStats = require('../aggregations/todoStats')
 const Todo = require('../models/todo')
 
-todosRouter.get('/', async (request, response, next) => {
+todosRouter.get('/', isAuthenticated, async (request, response, next) => {
     const { 
         sort = 'createdAt',
         order = 'asc',
@@ -38,13 +40,9 @@ todosRouter.get('/', async (request, response, next) => {
     })
 })
 
-todosRouter.post('/', async (request, response) => {
+todosRouter.post('/', isAuthenticated, async (request, response) => {
     const body = request.body
     const user = request.user
-
-    if (!user) {
-        return response.status(400).json({ error: 'token missing or invalid.' })
-    }
 
     const todo = new Todo({
         title: body.title,
@@ -61,7 +59,7 @@ todosRouter.post('/', async (request, response) => {
     response.json(savedTodo)
 })
 
-todosRouter.delete('/:id', async (request, response) => {
+todosRouter.delete('/:id', isAuthenticated, isOwner, async (request, response) => {
     if (!request.token) {
         return response
             .status(400)
@@ -70,45 +68,15 @@ todosRouter.delete('/:id', async (request, response) => {
             })
     }
 
-    const user = request.user
-    const todo = await Todo.findById(request.params.id)
-
-    if (user.role === 'user' && user._id.toString() !== todo.user.toString()) {
-        return response
-            .status(401)
-            .json({
-                error: 'Unauthorized request.'
-            })
-    }
-
     await Todo.findByIdAndDelete(request.params.id)
     response.status(204).end()
 })
 
-todosRouter.patch('/:id', async (request, response) => {
+todosRouter.patch('/:id', isAuthenticated, isOwner, async (request, response) => {
     const { title, description, remark, status, categories } = request.body
-    const user = request.user
-
-    if (!user) {
-        response.status(400).json({
-            error: 'token missing or invalid.'
-        })
-    }
 
     const todo = await Todo.findById(request.params.id)
-
-    
-    if (!todo) {
-        return response.status(404).end()
-    }
-    
-    if (user.role === 'user' && user._id.toString() !== todo.user.toString()) {
-        return response
-            .status(401)
-            .json({
-                error: 'Unauthorized request.'
-            })
-    }
+    if (!todo) { return response.status(404).end() }
 
     todo.title = title
     todo.description = description
@@ -120,7 +88,7 @@ todosRouter.patch('/:id', async (request, response) => {
     response.json(savedTodo)
 })
 
-todosRouter.get('/stats', async (request, response) => {
+todosRouter.get('/stats', isAuthenticated, isOwner, async (request, response) => {
     const user = request.user
     let stats = null
     
