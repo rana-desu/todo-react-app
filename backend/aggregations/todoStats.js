@@ -14,9 +14,10 @@ const userStatsPipeline = (userId) => [
         },
       ],
       byCategory: [
+        { $unwind: '$categories' },
         {
           $group: {
-            _id: '$category',
+            _id: '$categories',
             count: { $sum: 1 },
           },
         },
@@ -70,16 +71,28 @@ const userStatsPipeline = (userId) => [
 ]
 
 const adminStatsPipeline = () => [
+  { $unwind: '$categories' },
   {
     $group: {
-      _id: { user: '$user', status: '$status', category: '$category' },
+      _id: {
+        user: '$user',
+        status: '$status',
+        category: '$categories',
+      },
+    },
+  },
+  {
+    $project: {
+      user: '$_id.user',
+      status: '$_id.status',
+      category: '$_id.category',
     },
   },
   {
     $group: {
-      _id: '$_id.user',
-      statuses: { $addToSet: '$_id.status' },
-      categories: { $addToSet: '$_id.category' },
+      _id: '$user',
+      statuses: { $addToSet: '$status' },
+      categories: { $addToSet: '$category' },
     },
   },
   {
