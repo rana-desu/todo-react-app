@@ -51,7 +51,7 @@ const App = () => {
           </div>
         ) : (
           <>
-          <div className="flex align-center justify-between gap-8 my-10">
+          <div className="border border-zinc-50/10 p-4 bg-zinc-50/1 rounded-2xl flex align-center justify-between gap-8 my-10">
             <TodoStats />
             <div>
             <Button onClick={logoutUser} label="logout" variant="cancel"/>

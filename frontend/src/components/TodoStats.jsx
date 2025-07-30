@@ -77,7 +77,7 @@ const TodoStats = () => {
   if (!statsData) return <p>Loading status chart...</p>
 
   return (
-    <div className="h-[400px] w-[500px]">
+    <div className="flex items-center justify-center h-[400px] w-[500px]">
       {requestedBy === 'user' ? (
         <Pie data={statsData} />
       ) : (

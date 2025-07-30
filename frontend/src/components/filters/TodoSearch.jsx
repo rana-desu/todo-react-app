@@ -17,11 +17,10 @@ const actionDropdownVariants = {
 
 
 const TodoSearch = () => {
-  const [searchBy, setSearchBy] = useState('title')
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
-  const { searchTerm, setSearchTerm } = useTodoStore()
+  const { searchBy, setSearchBy, searchTerm, setSearchTerm } = useTodoStore()
   const debuoncedSearchTerm = useDebounce(searchTerm, 800)
 
   useEffect(() => {
@@ -43,11 +42,12 @@ const TodoSearch = () => {
 
   useEffect(() => {
     if (debuoncedSearchTerm != '') {
-      useTodoStore.getState().searchTodos(searchBy, debuoncedSearchTerm)
+      useTodoStore.getState().setSearchTerm(debuoncedSearchTerm)
+      useTodoStore.getState().refetchPage()
     } else if (debuoncedSearchTerm === '') {
       useTodoStore.getState().refetchPage()
     }
-  }, [searchBy, debuoncedSearchTerm])
+  }, [debuoncedSearchTerm])
 
   return (
     <div className="flex items-center">

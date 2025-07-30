@@ -143,14 +143,7 @@ const useTodoStore = create((set, get) => ({
     },
 
     setSearchTerm: (searchTerm) => { set({ searchTerm }) },
-
-    searchTodos: (searchBy, searchTerm) => {
-        set({
-            searchBy: searchBy,
-            searchTerm: searchTerm
-        })
-        get().refetchPage()
-    },
+    setSearchBy: (searchBy) => { set({ searchBy })},
 
     filterByCategory: (category) => {
         set(({categoryFilter}) => {
