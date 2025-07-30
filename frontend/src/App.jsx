@@ -20,15 +20,6 @@ const App = () => {
     useTodoStore.getState().fetchTodosPage(1)
   }, [])
 
-  useEffect(() => {
-    const loggedInUser = window.localStorage.getItem('loggedInUser')
-    if (loggedInUser) {
-      useUserStore
-        .getState()
-        .setUser(JSON.parse(loggedInUser))
-    }
-  }, [])
-
   const loginForm = () => (
     <Togglable 
       buttonLabel="login" 

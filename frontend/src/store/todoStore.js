@@ -19,7 +19,7 @@ const useTodoStore = create((set, get) => ({
 
     statusFilter: 'all',
     categoryFilter: [],
-    sortOrder: 'asc',
+    sortOrder: 'desc',
     searchBy: 'title',
     searchTerm: '',
 

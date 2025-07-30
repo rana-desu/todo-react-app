@@ -31,14 +31,23 @@ const useUserStore = create(
         }
       },
 
-      logoutUser: () => {
+      logoutUser: async () => {
         get().setUser(null)
+
+        if (get().persist?.clearStorage) {
+          await persist.clearStorage()
+        }
       },
     }),
     {
       name: 'user-storage',
       getStorage: () => localStorage,
-      partialize: (state) => ({ user: state.user })
+      partialize: (state) => ({ user: state.user }),
+      onRehydrateStorage: () => (state) => {
+        if (state?.user?.token) {
+          todoService.setToken(state.user.token)
+        }
+      }
     }
   )
 )

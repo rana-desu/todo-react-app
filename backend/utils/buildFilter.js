@@ -12,7 +12,7 @@ const buildFilter = (query) => {
 
     if (categories) {
         filter.categories = {
-            $in: categories
+            $in: categories.split(',')
         }
     }
     

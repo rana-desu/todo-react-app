@@ -23,7 +23,9 @@ const getPage = async (
     params.searchBy = searchBy
     params.searchTerm = searchTerm
   }
-  if (categories) params.categories = categories
+  if (categories && categories.length > 0) params.categories = categories.join(',')
+
+  console.log('requesting params: ', params)
 
   const response = await axios.get(
     todosUrl, {
