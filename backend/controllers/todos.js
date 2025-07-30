@@ -1,5 +1,6 @@
 const todosRouter = require('express').Router()
 const buildFilter = require('../utils/buildFilter')
+const todoStats = require('../aggregations/todoStats')
 const Todo = require('../models/todo')
 
 todosRouter.get('/', async (request, response, next) => {
@@ -118,5 +119,18 @@ todosRouter.patch('/:id', async (request, response) => {
     const savedTodo = await todo.save()
     response.json(savedTodo)
 })
+
+todosRouter.get('/stats', async (request, response) => {
+    const user = request.user
+    let stats = null
+    
+    if (user.role === 'admin') {
+        stats = await Todo.aggregate(todoStats.adminStatsPipeline())
+    } else {
+        stats = await Todo.aggregate(todoStats.userStatsPipeline(user._id))
+    }
+
+    response.status(200).json(stats)
+})  
 
 module.exports = todosRouter

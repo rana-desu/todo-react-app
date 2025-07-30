@@ -72,6 +72,15 @@ const update = async (id, todoObject) => {
 }
 
 
+const getStats = async () => {
+  const response = await axios.get(`${todosUrl}/stats`, {
+    headers: { Authorization: token }
+  })
+
+  return response.data
+}
+
+
 export default { 
   getPage, 
   getAllTodos, 
@@ -79,4 +88,5 @@ export default {
   remove, 
   update,
   setToken,
+  getStats,
 }

@@ -6,6 +6,7 @@ import { AddTodo } from './components/modals'
 import { TodoTable } from './components/table_view'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
+import TodoStats from './components/TodoStats'
 import ResultStats from './components/ResultStats'
 import Togglable from './components/Togglable'
 import Button from './components/Button'
@@ -59,9 +60,12 @@ const App = () => {
           </div>
         ) : (
           <>
-          <div className="flex align-center justify-end gap-8">
+          <div className="flex align-center justify-between gap-8">
+            <TodoStats />
+            <div>
             <Button onClick={logoutUser} label="logout" variant="cancel"/>
             <AddTodo />
+            </div>
           </div>
           <ResultStats />
           <TodoTable />

@@ -12,6 +12,7 @@ const useTodoStore = create((set, get) => ({
     totalTodos: 0,
 
     cachedPages: [], // [page_num: {[data], totalPages, totalTodos}, ...]
+    statusStats: null,
 
     todos: [],
     currentSerials: [],
@@ -178,6 +179,13 @@ const useTodoStore = create((set, get) => ({
                 { currentSerials: newSerials }
             )
         })
+    },
+
+    getStatusStats: async () => {
+        const stats = await todoService.getStats()
+
+        set({ statusStats: stats })
+        get().refetchPage()
     },
 }))
 
